@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: local("Montserrat-Regular"), url("../assets/font/Montserrat-Regular.ttf") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: local("Montserrat-Bold"), url("../assets/font/Montserrat-Bold.ttf") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --font-family-main: "Montserrat-Regular", sans-serif; /* Default font */
+  --font-family-secondary: "Montserrat-Bold", sans - serif; /* Secondary font */
+}
+
+body {
+  margin:0;
+  padding:0;
+  font-family: var(--font-family-main) !important;
+}
+
+html::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #DEEFF7;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #0B233F;
+  border-radius: 10px;
+}

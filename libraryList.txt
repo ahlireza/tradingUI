@@ -1,0 +1,17 @@
+react-router-dom
+react-redux
+react-bootstrap
+
+@reduxjs/toolkit
+
+@mui/material
+@mui/x-date-pickers
+
+@emotion/react
+@emotion/styled
+
+iconsax-react
+styled-components
+js-cookie
+
+xlsx

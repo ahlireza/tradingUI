@@ -1,0 +1,28 @@
+.toast-success {
+  background-color: #F0FAF8;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.toast-error {
+  background-color: #FBEFEF;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.toast-warning {
+  background-color: #FFF8EB;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.toast-info {
+  background-color: #F7FBFE;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.Toastify__toast-body{
+    display: flex;
+    align-items: start;
+}
