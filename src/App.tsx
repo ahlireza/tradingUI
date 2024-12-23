@@ -1,8 +1,7 @@
 import { useSelector }    from "react-redux"
 import { ThemeProvider }  from "styled-components" 
 
-import { RootState }                  from "./store/interfaces" 
-import { GlobalStyles, customTheme }  from "./components/theme" 
+import { GlobalStyles, customTheme }  from "./components/theme"
 import { ImplementationRoutes }       from "./routes" 
 
 function App() {

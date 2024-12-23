@@ -10,9 +10,6 @@ export const BoxHeader = styled(CustomBox)`
   align-items: center;
   justify-content: space-between;
   margin:5px 20px;
-    @media (max-width: 850px) {
-      flex-direction: column;
-    }
 `;
 
 export const Name = styled(Typography)`
@@ -23,13 +20,6 @@ export const Name = styled(Typography)`
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.3px;
-
-  @media (max-width: 990px) {
-    font-size: 24px;
-  }
-  @media (max-width: 540px) {
-    font-size: 20px;
-  }
 `;
 
 export const BoxFooter = styled(CustomBox)`
@@ -43,9 +33,6 @@ export const BoxInput = styled(CustomBox)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1000px) {
-    flex-direction: column;
-  }
 `;
 
 export const EditBox = styled.div`

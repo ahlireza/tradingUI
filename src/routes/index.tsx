@@ -6,7 +6,8 @@ import { Navigate, useNavigate} from "react-router-dom"
 import { Layout }       from "src/components/layout" 
 import { Login }        from "src/pages/login" 
 
-import { Dashboard }          from "src/pages/dashboard"
+import { Dashboard }  from "src/pages/dashboard"
+import { Orders }     from "src/pages/orders"
 
 //------------------------------
 //---Implementation Routes
@@ -15,16 +16,13 @@ import { Dashboard }          from "src/pages/dashboard"
   export const ImplementationRoutes = () => {
   const navigate = useNavigate() 
 
-  const cookie = Cookies.get("Tradeing_token")
-  const local = localStorage.getItem("Trading_BackOffice")
-
-  const token = cookie || local
+  const token = Cookies.get("Tradeing_token")
   
 //------------------------------
 //---Check User Login Status
 //------------------------------
   useEffect(() => {
-    if (!cookie) {
+    if (!token) {
       navigate("/login")
     }
   }, [token])
@@ -37,6 +35,7 @@ import { Dashboard }          from "src/pages/dashboard"
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/orders" element={<Orders />} />
           </Routes>
         </Layout>
       ): (

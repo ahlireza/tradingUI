@@ -1,31 +1,25 @@
 import { useEffect, useState }  from "react"
 import { useNavigate }          from "react-router-dom"
-// import { toast }                from "react-toastify"
-import Cookies                  from "js-cookie"
-// import axios                    from "axios"
 
 import { GridCol, GridContainer, GridRow }  from "src/components/core/Grid"
 import { BtnComponent }                     from "src/components/core/Button"
 import { IconViewer }                       from "src/components/core/IconViewer"
-import { CustomBox }                         from "src/components/core/CustomBox"
 import { InputText }                        from "src/components/core/Input/InputText"
-import { CheckBox }                         from "src/components/core/Input/CheckBox"
 import { Color }                            from "src/definition/color"
 
-// import { LoginService } from "src/services/accountServices/LoginServices"
+import { LoginService } from "src/services/loginServices"
 
 import logo from "src/assets/logo.png"
 
 import {
+  HeaderContainer,
   BoxLogo,
-  BoxLogoContaner,
   LoginText,
-  Remember,
-  StyleBoxForget,
   StyleContainer,
   StyleMainBox,
   StyledMobileView
 } from "./style"
+import { log } from "console"
 
 //------------------------------
 //---Login
@@ -40,7 +34,6 @@ export const Login = () => {
   const [passError, setPassError] = useState(false)
   const [usernameHelper, setUsernameHelper] = useState("")
   const [passHelper, setPassHelper] = useState("")
-  const [checkedRadio, setChecked] = useState(false)
 
   useEffect(() => {
     return () => {
@@ -56,7 +49,7 @@ export const Login = () => {
     let error = false
     if (!username) {
       setUsernameError(true)
-      setUsernameHelper("Enter the username...")
+      setUsernameHelper("Enter your email...")
       error = true
     }
     if (!pass) {
@@ -64,147 +57,79 @@ export const Login = () => {
       setPassHelper("Enter the password...")
       error = true
     }
-
-    // if (error === false) {
-    //   loginHandler(username, pass)
-    // }
-
-    loginHandler(username, pass)
   
-    // LoginService(username, pass)
-    // navigate("/dashboard")
-  }
-
-  //------------------------------
-  //---Call Login Api
-  //------------------------------
-  // Users Data Format{
-  //   name,
-  //   role,
-  //   email,
-  //   access,
-  //   token
-  // }
-  //------------------------------
-  const loginHandler = async (username: string, password: string) => {
-    // await axios.post(`${ BaseUrlApi.baseUrl }/login`, {
-    //   username: username,
-    //   password: password
-    // })
-    // .then(function (response) {
-    //   if (response.status === 200) {
-    //     if (response.data.code === "200") {
-    //       //---Convert Data to JSON
-    //       const convertDataToString = JSON.stringify(response.data.data)
-    //       localStorage.setItem("Flights_Catering", convertDataToString)
-
-    //       //---Save Token
-    //       localStorage.setItem("Flights_token", response.data.data?.token)
-    //       Cookies.set("Flights_token", response.data.data?.token)
-
-    //       navigate("/dashboard")
-    //     }
-    //     else
-    //       toast.error(response.data.message)
-    //   }
-    // })
-    // .catch(function (error) {
-    //   console.log(error)
-    // })
-
-    const loginInfo = {
-      name: "Admin",
-      role: "Admin",
-      email: "admin@localhost",
-      access: "Manager",
-      token: "12345"
+    if (error === false){
+      LoginService(username, pass)
+      navigate("/")
     }
-    localStorage.setItem("Trading_BackOffice", JSON.stringify(loginInfo))
-    localStorage.setItem("Tradeing_token", loginInfo.token)
-    Cookies.set("Tradeing_token", loginInfo.token)
-
-    navigate("/")
   }
+ 
   //------------------------------
   return (
-    <GridContainer fluid={true} style={{ background: Color.WHITE }}>
-      <GridRow>
-        <GridCol xs={12} md={6}>
-          <StyledMobileView>
-            <StyleMainBox>
-              <BoxLogoContaner>
-                <BoxLogo>
-                  <IconViewer src={logo} alt={"LoginImage"} style={{ width: "160px" }} />
-                </BoxLogo>
-              </BoxLogoContaner>
+      <GridContainer fluid={true} style={{ background: Color.WHITE }}>
+        <HeaderContainer style={{backgroundColor: Color.BLUE_DARK}}>
+          <BoxLogo>
+            <IconViewer
+              src={logo}
+              alt={"LogoImage"}
+              style={{ width: "120px", height: "35px" }}
+            />
+          </BoxLogo>
+        </HeaderContainer>
+        
+        <GridRow>
+          <GridCol xs={12} md={6}>
+            <StyledMobileView>
+              <StyleMainBox>
+                <StyleContainer>
+                  <LoginText variant="bold">
+                    Welcome Back...!
+                  </LoginText>
 
-              <StyleContainer>
-                <LoginText variant="bold">
-                  Welcome Back...!
-                </LoginText>
+                  <InputText
+                    placeholder="Your Email"
+                    type="text"
+                    onChange={e => {
+                      setUsername(e.target.value)
+                      setUsernameError(false)
+                      setUsernameHelper("")
+                    }}
+                    error={usernameError.toString()}
+                    helperText={usernameHelper}
+                    value={username}
+                     onKeyUp={(e) => e.key === "Enter" && errorHandler}
+                  />
 
-                <InputText
-                  placeholder="Email or Mobile"
-                  type="text"
-                  onChange={e => {
-                    setUsername(e.target.value)
-                    setUsernameError(false)
-                    setUsernameHelper("")
-                  }}
-                  error={usernameError.toString()}
-                  helperText={usernameHelper}
-                  value={username}
-                  onKeyUp={(e) => e.key === "Enter" && errorHandler}
-                />
+                  <InputText
+                    placeholder="Password"
+                    type="password"
+                    onChange={event => {
+                      setPass(event.target.value);
+                      setPassError(false)
+                      setPassHelper("")
+                    }}
+                    error={passError.toString()}
+                    helperText={passHelper}
+                    value={pass}
+                    onKeyUp={(e) => e.key === "Enter" && errorHandler}
+                  />
+                  <BtnComponent
+                    onClick={errorHandler}
+                    label="Sign in"
+                    variant="contained"
+                    style={{
+                      marginTop: "32px",
+                      backgroundColor: Color.BLUE_DARK,
+                      cursor: "pointer",
+                    }}
+                  />
+                </StyleContainer>
 
-                <InputText
-                  placeholder="Password"
-                  type="password"
-                  onChange={event => {
-                    setPass(event.target.value);
-                    setPassError(false)
-                    setPassHelper("")
-                  }}
-                  error={passError.toString()}
-                  helperText={passHelper}
-                  value={pass}
-                  onKeyUp={(e) => e.key === "Enter" && errorHandler}
-                />
-              <StyleBoxForget>
-                  <CustomBox style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                    onClick={() => setChecked(!checkedRadio)}
-                  >
-                    {/* //@ts-ignore */}
-                    <CheckBox
-                      type="radio"
-                      label={""}
-                      value={""}
-                      checked={checkedRadio}
-                      onChange={() => { }}
-                      radioGroup="" />
-                    <Remember>Remember me</Remember>
-                  </CustomBox>
-                </StyleBoxForget>
-                <BtnComponent
-                  onClick={errorHandler}
-                  label="Sign in"
-                  variant="contained"
-                  style={{
-                    marginTop: "32px",
-                    backgroundColor: Color.BLUE_DARK,
-                    cursor: "pointer",
-                  }}
-                />
-              </StyleContainer>
-
-            </StyleMainBox>
-          </StyledMobileView>
-        </GridCol>
-      </GridRow>
-    </GridContainer >
+              </StyleMainBox>
+            </StyledMobileView>
+          </GridCol>
+        </GridRow>
+      </GridContainer>
   )
 }
 

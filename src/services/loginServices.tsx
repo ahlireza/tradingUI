@@ -7,31 +7,64 @@ import { BaseUrlApi } from "src/definition/domain"
 //------------------------------
 //---login Service
 //------------------------------
-// export const LoginService = async (url: string, username: string, password: string) => {\   
-    // const response = postApi(url, data)
-
-export const LoginService = async (username: string, password: string) => {
-    await axios.post(`${ BaseUrlApi.baseUrl }/login`, {
-        username: username,
-        password: password
-    })
-    .then(function (response) {
-        if (response.status === 200) {
-            if (response.data.code === "200") {
-                //---Convert Data to JSON
-                const convertDataToString = JSON.stringify(response.data.data)
-                localStorage.setItem("Flights_Catering", convertDataToString)
-    
-                //---Save Token
-                localStorage.setItem("Flights_token", response.data.data?.token)
-                Cookies.set("Flights_token", response.data.data?.token)
-            }
-            else
-                toast.error(response.data.message)
+export const LoginService = async (username: string, password: string): Promise<void> => {
+  try {
+      const response = await axios.post(`${BaseUrlApi.baseUrl}/login`, {
+          username,
+          password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-    })
-    .catch(function (error) {
-        console.log(error)
-    })
+      })
+      const data = response.data
+
+      if (response.status === 200 && data.code === 200) {
+        //--- Save User Data
+        localStorage.setItem("Trading_BackOffice", JSON.stringify(data))
+        //--- Save Token
+          if (data?.token) {
+            Cookies.set("Tradeing_token", data?.token, { expires: 1, path: '/' })
+            toast("Login successfully...")
+          } else {
+            toast.warn("Token not found in response...")
+          }
+      } else {
+          toast.error(response.data?.message || "Unexpected error occurred...")
+      }
+  } catch (error) {
+      console.error("Error Respond: ", error.response || error.message)
+      toast.error("Login failed. Please try again later...")
+  }
+
+  // const data = {
+  //   code: 200,
+  //   message: "Success",
+  //   user_code: "C-100",
+  //   name: "Admin",
+  //   email: "alireza@example.com",
+  //   access: "Manager",
+  //   token: "1234567890"
+  // }
+  // console.log("Fix: ", data)
+
+  // if (data.code === 200) {
+  //   localStorage.setItem("Trading_BackOffice", JSON.stringify(data))
+  //   Cookies.set("Tradeing_token", data.token)
+  // }
 }
-    
+
+//------------------------------
+//---Password Change
+//------------------------------
+export const ChangePassword = async (userCode: string, oldPassword: string, newPassword: string): Promise<void> => {
+    // const response = await axios.post(`${BaseUrlApi.baseUrl}/test`, {
+    //     userCode,
+    //     oldPassword,
+    //     newPassword
+    // })
+    // ???????
+    // ???????
+    // ???????
+}
+

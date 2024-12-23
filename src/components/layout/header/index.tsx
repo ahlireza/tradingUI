@@ -1,36 +1,33 @@
-import { useNavigate }      from "react-router-dom"
-import { useState }         from "react"
-import Cookies              from "js-cookie"
+import { useNavigate, Link }  from "react-router-dom"
+import { useState } from "react"
+import Cookies      from "js-cookie"
 
-import { getCurrentDate }   from "src/hook"
+import { Notification } from "iconsax-react"
+import { ProfileCircle } from "iconsax-react"
+
 import { ProfileModal }     from "./modal/profile"
-import { CustomBox }        from "src/components/core/CustomBox"
+
+import { IconViewer } from "src/components/core/IconViewer"
+
+import {UserProps}  from "src/definition/interfaces"
+import { Color }    from "src/definition/color"
+
+
+import logo from "src/assets/logo.png"
 
 import {
-    ItemLink,
-    BoxHeaderEnd,
-    BoxHeaderStart,
-    BoxProfile,
-    ProfileStyle,
-    HR,
-    HeaderContainer,
-    NotificationStyle,
-    TextProfile,
-    TextProfileDesc,
-    TextWellcome
+  HeaderContainer,
+  BoxHeaderStart,
+  BoxHeaderEnd,
+  BoxLogo,
+  ItemLink,
+  BoxProfile,
+  ProfileStyle,
+  HR,
+  NotificationStyle,
+  TextProfile,
+  BoxHeader
 } from "./style"
-
-//------------------------------
-interface UserProps {
-  nickName: string
-  firstName: string
-  lastName: string
-  role: string
-  phone: string
-  email: string
-  access: string
-  token: string
-}
 
 //------------------------------
 //---Header
@@ -38,10 +35,10 @@ interface UserProps {
 export const Header = () => {
     const navigate = useNavigate()
 
-    const getUserInfo: any = localStorage.getItem("Flights_Catering")
+    const getUserInfo: any = localStorage.getItem("Trading_BackOffice")
     const isUserInfo: UserProps = JSON.parse(getUserInfo)
-      const nickName = isUserInfo.nickName
-       const role = isUserInfo.role
+    const userName = isUserInfo.name   
+
     //------------------------------
     //---Profile Handling
     //------------------------------
@@ -59,39 +56,75 @@ export const Header = () => {
     //---Logout Handler
     //------------------------------
     const handleLogout = () => {
-        localStorage.removeItem("Flights_Catering")
-        Cookies.remove("Flights_token")
+        localStorage.removeItem("Trading_BackOffice")
+        Cookies.remove("Tradeing_token")
         navigate("/login")
     }
 
     //------------------------------
     return (
         <div>
-            <HeaderContainer>
+            <HeaderContainer style={{backgroundColor: Color.BLUE_DARK}}>
             <BoxHeaderStart>
-                <TextWellcome>
-                    {getCurrentDate()}
-                </TextWellcome>
+              <div>
+                <BoxLogo>
+                  <Link to = "/">
+                    <IconViewer
+                      src={logo}
+                      alt={"LogoImage"}
+                      style={{ width: "120px", height: "35px" }}
+                    />
+                  </Link>
+                </BoxLogo>
+              </div>
             </BoxHeaderStart>
+
+            <BoxHeader>
+              <ItemLink 
+                style={{marginRight: "20px"}}
+                to={"/orders"}  
+              >
+                Orders
+              </ItemLink>
+              <ItemLink style={{marginRight: "20px"}}>
+                Clearing House
+                </ItemLink>
+              <ItemLink style={{marginRight: "20px"}}>
+                Settlement Centre
+                </ItemLink>
+            </BoxHeader>
             
             <BoxHeaderEnd>
-                <NotificationStyle />
-                <ItemLink onClick={handleLogout}>
-                    Logout
-                </ItemLink>
-                
+              <ItemLink style = {{fontSize: "12px"}}>
+                    Rate
+                </ItemLink>               
+              <ItemLink style = {{fontSize: "12px"}}>
+                    Customers
+                </ItemLink>               
+              <ItemLink style = {{fontSize: "12px"}}>
+                    Reports
+                </ItemLink>               
+              <ItemLink style = {{fontSize: "12px"}}>
+                    Configuration
+                </ItemLink>               
                 <HR />
-                
+                <NotificationStyle /> 
+                <Notification size="16" color={Color.WHITE}/>
                 <BoxProfile
                     style={{ cursor: "pointer" }}
                     onClick={handleProfileModal}
                 >
-                    <ProfileStyle/>
-                      <CustomBox>
-                        <TextProfile> {nickName} </TextProfile>
-                        <TextProfileDesc> {role} </TextProfileDesc>
-                    </CustomBox>
+                  <ProfileStyle/>
+                    <TextProfile> {userName} </TextProfile>
+                    <ProfileCircle size="16" color={Color.WHITE}/>
                 </BoxProfile>
+                <HR />
+                <ItemLink
+                  style = {{fontSize: "12px"}}
+                  onClick={handleLogout}
+                >
+                    Logout
+                </ItemLink>               
             </BoxHeaderEnd>
             </HeaderContainer>
 

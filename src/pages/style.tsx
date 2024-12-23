@@ -17,14 +17,6 @@ export const BoxHeader = styled(CustomBox)`
 export const BoxHeaderItem = styled(CustomBox)`
   display: flex;
   align-items: center;
-  
-  @media (max-width: 990px) {
-    width:100%;
-    justify-content: space-between;
-  }
-    @media (max-width: 540px) {
-    flex-direction: column;
-  }
 `;
 
 export const Name = styled(Typography)`
@@ -35,12 +27,5 @@ export const Name = styled(Typography)`
   font-weight: 800;
   line-height: normal;
   letter-spacing: 0.3px;
-
-  @media (max-width: 990px) {
-    font-size: 24px;
-  }
-  @media (max-width: 540px) {
-    font-size: 20px;
-  }
 `;
 

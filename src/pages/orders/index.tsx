@@ -8,11 +8,11 @@ import {
 //------------------------------
 //---Dashboard
 //------------------------------
-export const Dashboard = () => {
+export const Orders = () => {
     return (
         <div>
             <BoxHeader>
-                <Name>Dashboard</Name>
+                <Name>Orders</Name>
             </BoxHeader>
         </div>
     )

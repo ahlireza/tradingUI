@@ -6,13 +6,15 @@ import Modal from "@mui/material/Modal"
 import Box from "@mui/material/Box"
 
 import { clearIsRefresh } from "src/store/actions/root"
-import { BtnComponent } from "src/components/core/Button"
-import { Typography } from "src/components/core/Typography"
-import { IconViewer } from "src/components/core/IconViewer"
-import { InputText } from "src/components/core/Input/InputText"
-import { Color } from "src/definition/color"
+import { BtnComponent }   from "src/components/core/Button"
+import { Typography }     from "src/components/core/Typography"
+import { IconViewer }     from "src/components/core/IconViewer"
+import { InputText }      from "src/components/core/Input/InputText"
 
-// import { BaseUrlApi }     from "src/definition"
+import {UserProps}  from "src/definition/interfaces"
+import { Color }    from "src/definition/color"
+
+import { ChangePassword } from "src/services/loginServices"
 
 import InfoClose from "src/assets/svg/close.svg"
 
@@ -29,18 +31,6 @@ type ModalProps = {
 }
 
 //------------------------------
-interface UserProps {
-  nickName: string
-  firstName: string
-  lastName: string
-  role: string
-  phone: string
-  email: string
-  access: string
-  token: string
-}
-
-//------------------------------
 //---Profile Modal
 //------------------------------
 export const ProfileModal: React.FC<ModalProps> = ({
@@ -48,18 +38,14 @@ export const ProfileModal: React.FC<ModalProps> = ({
   handleClose
 }) => {
   
-  const getUserInfo: any = localStorage.getItem("Flights_Catering")
+  const getUserInfo: any = localStorage.getItem("Trading_BackOffice")
   const isUserInfo: UserProps = JSON.parse(getUserInfo)
-  const nickName = isUserInfo.nickName
-  const name = isUserInfo.firstName + " " + isUserInfo.lastName
-  const phone = isUserInfo.phone
+  const name = isUserInfo.name
   const email = isUserInfo.email
-  
+  const userCode = isUserInfo.user_code
 
   const dispatch = useDispatch()
   //--- State
-  const [newPhone, setNewPhone] = useState("")
-  const [newEmail, setNewEmail] = useState("")
   const [oldPassword, setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -77,8 +63,6 @@ export const ProfileModal: React.FC<ModalProps> = ({
     handleClose()
     dispatch(clearIsRefresh())
 
-    setNewPhone("")
-    setNewEmail("")
     setOldPassword("")
     setNewPassword("")
     setConfirmPassword("")
@@ -94,24 +78,25 @@ export const ProfileModal: React.FC<ModalProps> = ({
   //------------------------------
   const errorHandler = () => {
     let error = false
-    let maxChanges = 3
-
+    let change = false
     //---Check Password
     if (!oldPassword) {
-      maxChanges -= 1
       if (newPassword) {
         setOldPasswordError(true)
         setOldPasswordHelper("Enter the old password")
         error = true
+        change = true
       }
       else if (confirmPassword) {
         setOldPasswordError(true)
         setOldPasswordHelper("Enter the old password")
         error = true
+        change = true
       }
-     }
+    }
     else 
     {
+      change = true     
       if (!newPassword) {
         setPasswordError(true)
         setPasswordHelper("Enter the new Password ")
@@ -122,58 +107,29 @@ export const ProfileModal: React.FC<ModalProps> = ({
         setPasswordHelper("Password does not match")
         error = true
       }
-    } 
+    }
+    console.log(error)
     //---Check Changes
-    if (!newPhone) {
-      maxChanges -= 1
+    if (error === false) {
+      editUserHandler(userCode,oldPassword, newPassword)
     }
-    if (!newEmail) {
-      maxChanges -= 1
-    }
-
-    if (maxChanges != 0) {
-      if (error === false) {
-        editUserHandler(nickName, newPhone, newEmail,oldPassword, newPassword)
-      }
-    }
-    else {
+    else if(change === false){
       closeModalResetStates()
     }
   }
 
   //------------------------------
-  //---Call Edit User Api
-  //------------------------------
-  // Users Data Format{
-  //    nickName,
-  //    phone,
-  //    email,
-  //    oldPassword
-  //    newPassword
-  // }
+  //---Call Change Password Api
   //------------------------------
   const editUserHandler = async (
-    nickName: string,
-    phone: string,
-    email: string,
+    userCode: string,
     oldPassword: string,
     newPassword: string
   ) => {
-    // await axios.post(`${ BaseUrlApi.baseUrl }/edit_profile`, {
-    //   nickName: nickName,
-    //   phone: phone,
-    //   email: email,
-    //   oldPassword: oldPassword,
-    //   newPassword: newPassword
-    // })
-    // .then((res) =>
-    //     closeModalResetStates()
-    // )
-    // .catch(function (error) {
-    //   toast.error("Error: " + error)
-    //   console.log(error)
-    // })
-    console.log("Update: ",nickName, phone, email,oldPassword, newPassword)
+    ChangePassword(userCode, oldPassword, newPassword)
+    // ???
+    // ???
+    // ???
     closeModalResetStates()
   }
 
@@ -214,7 +170,7 @@ export const ProfileModal: React.FC<ModalProps> = ({
                 fontWeight: "bold",
                 fontSize: "18px"
               }}>
-              {nickName}
+              {name}
             </Typography>
           </Box>
           <Box style={{ width: "100%" }}>
@@ -224,39 +180,10 @@ export const ProfileModal: React.FC<ModalProps> = ({
                 fontStyle: "italic",
                 fontWeight: "bold",
               }}>
-              {name}
+              {email}
             </Typography>
           </Box>
         </BoxInput>
-
-        <BoxInput style={{ marginTop: "1em" }}>
-          <Box style={{ width: "100%" }}>
-            <InputText
-              style={{ height: "24px", width: "85%" }}
-              label="Phone Number"
-              placeholder={phone}
-              type="text"
-              onChange={(e) => {
-                setNewPhone(e.target.value.trim())
-              }}
-              value={newPhone}
-            />
-          </Box>
-          <Box style={{ width: "100%" }}>
-            <InputText
-              style={{ height: "24px", width: "85%", marginLeft: "7px" }}
-              label="Email"
-              placeholder={email}
-              type="text"
-              onChange={(e) => {
-                setNewEmail(e.target.value.trim())
-              }}
-              value={newEmail}
-            />
-          </Box>
-        </BoxInput>
-
-        <HRBottom />
 
         <BoxInput style={{ marginTop: "1em" }}>
          <Box style={{ width: "100%" }}>

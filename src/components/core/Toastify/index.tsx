@@ -2,7 +2,7 @@ import React, { useEffect }         from "react";
 import { useSelector }              from "react-redux";
 import { toast, ToastContainer }    from "react-toastify";
 
-import { RootState }    from "src/store/interfaces";
+import { RootState }    from "@/definition/interfaces";
 import { Typography }   from "../Typography";
 import { IconViewer }   from "../IconViewer";
 

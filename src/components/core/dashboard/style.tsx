@@ -8,9 +8,6 @@ export const BoxInput = styled(CustomBox)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1000px) {
-    flex-direction: column;
-  }
 `;
 
 export const Lable = styled(Typography)`

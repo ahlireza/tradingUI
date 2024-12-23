@@ -30,9 +30,9 @@ const StyledFormControl = styled(FormControl) <TextInputProps> `
     background: #EDEDED;
     color:#111827;
     height:30px;
+    width: 80%;
     box-shadow:none !important;
     font-size: 12px;
-    width: 80%;
 
     &::placeholder {
         color: #A0AEC0 !important;

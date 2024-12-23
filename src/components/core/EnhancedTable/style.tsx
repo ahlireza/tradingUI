@@ -119,10 +119,6 @@ export const StyledPagination = styled.div`
 export const StyledRecorde = styled.div`
   display: flex;
   align-items: center;
-  @media (max-width: 623px) {
-      justify-content: space-between;
-      width: 100%;
-  }
 `;
 
 export const TextBody = styled(Typography)`
@@ -150,21 +146,3 @@ export const TextTHead = styled(Typography)`
   font-weight: 600;
   margin: 0;
 `;
-
-
-
-// export const BoxHeaderSec = styled(Box)`
-//     margin-top:16px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     @media (max-width: 992px) {
-//       margin-bottom:16px;
-//     }
-//     @media (max-width: 623px) {
-//       flex-direction: column;
-//         align-items: space-between;
-//         justify-content: space-between;
-//     }
-// `;
-

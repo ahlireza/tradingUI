@@ -18,6 +18,7 @@ interface BtnComponentProps extends HTMLAttributes<HTMLDivElement> {
     endIcon?: ReactNode;
     disabled?: boolean
 }
+
 //------------------------------
 //---Button Component
 //------------------------------
@@ -40,9 +41,9 @@ export const BtnComponent: React.FC<BtnComponentProps> = ({ label, style, varian
 
     const customStyle: React.CSSProperties = {
         ...(btnStyle as React.CSSProperties),
-        width: "100%",
         height: "56px",
-        fontSize: "12px",
+        width: "80%",
+        fontSize: "14px",
         padding: "12px",
         borderRadius: "12px",
         display: "flex",
@@ -61,9 +62,9 @@ export const BtnComponent: React.FC<BtnComponentProps> = ({ label, style, varian
             customStyle.color = "#A0A0A0";
             customStyle.border = "none"
         } else if (variant === "contained") {
-            // customStyle.border = "1px solid #CFCFD0";
-            // customStyle.backgroundColor = "#F6F6F6";
-            // customStyle.color = "#A0A0A0";
+            customStyle.border = "1px solid #CFCFD0";
+            customStyle.backgroundColor = "#F6F6F6";
+            customStyle.color = "#A0A0A0";
         }
         customStyle.cursor = "not-allowed";
     }
@@ -76,6 +77,9 @@ export const BtnComponent: React.FC<BtnComponentProps> = ({ label, style, varian
     );
 };
 
+//------------------------------
+//---Button Icon
+//------------------------------
 export const BtnIcon = ({ src, alt, style, lable, ...rest }: BtnIcon) => {
     return (
         <Button {...rest}>
