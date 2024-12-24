@@ -4,10 +4,6 @@ import { Link }     from "react-router-dom"
 import { Typography }   from "src/components/core/Typography"
 import { CustomBox }    from "src/components/core/CustomBox"
 
-//---Icon
-import { ReactComponent as Notification }   from "src/assets/svg/notification.svg"
-import { ProfileCircle }                    from "iconsax-react"
-
 //------------------------------
 export const HeaderContainer = styled.header`
     height: 70px;
@@ -45,23 +41,20 @@ export const BoxLogo = styled(CustomBox)`
   margin: 0 0 0 30px;
 `;
 
-export const ItemLink = styled(Link) <{ active: string }>`
+export const ItemLink = styled(Link) <{ active: boolean }>`
     text-decoration: none;
-    color: ${({ active }) => (active === "true" ? "#FFFF00" : "#FFFFFF")};
+    color: ${({ active }) => (active ? "#FFFF00" : "#FFFFFF")};
     font-size: 14px;
     font-style: normal;
     margin: 0 0 0 10px;
-    font-weight:${({ active }) => (active === "true" ? "700" : "500")};
-    font-family:${({ active }) => (active === "true" ? "Montserrat-Bold" : "Montserrat-Regular")};
+    font-family: Montserrat;
+    font-weight:${({ active }) => (active ? "700" : "500")};
 `;
 
 export const BoxProfile = styled(CustomBox)`
+    margin: 0 0 0 10px;
     display: flex;
     align-items: center;
-`;
-
-export const ProfileStyle = styled(ProfileCircle)`
-    margin: 0 16px 0 0;
 `;
 
 export const HR = styled.div`
@@ -71,16 +64,14 @@ export const HR = styled.div`
     margin:0 1px 0 10px;
 `;
 
-export const NotificationStyle = styled(Notification)`
-    margin: 0 1px 0 0;
-`;
-
 export const TextProfile = styled(Typography)`
     color: #FFFFFF;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    margin:0 5px 0 0;
+    font-family: Montserrat;
+    margin: 0 5px 0 0;
+    padding: 10px;
 `;
 
 

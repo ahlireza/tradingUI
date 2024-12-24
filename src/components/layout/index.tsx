@@ -1,16 +1,10 @@
 import { ReactNode } from "react"
 
-
 import { GridContainer, GridRow } from "src/components/core/Grid"
 
 import { Header } from "./header"
 
-
-
-import {
-  MainChaild,
-  MainContainer
-} from "./style"
+import { MainContainer } from "./style"
 
 //------------------------------
 interface Props {
@@ -28,13 +22,13 @@ export const Layout = ({ children }: Props) => {
       <Header/>
       <GridContainer fluid={true}>
         <GridRow>
-          <MainContainer>
-            <MainChaild>
+          <div>
+            <MainContainer>
               {children}
-            </MainChaild>
-          </MainContainer>
+            </MainContainer>
+          </div>
         </GridRow>
-      </GridContainer>
+      </GridContainer>      
     </div >
   )
 }

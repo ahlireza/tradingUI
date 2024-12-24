@@ -1,4 +1,4 @@
-import { useNavigate, Link }  from "react-router-dom"
+import { useNavigate, Link, useLocation }  from "react-router-dom"
 import { useState } from "react"
 import Cookies      from "js-cookie"
 
@@ -22,9 +22,7 @@ import {
   BoxLogo,
   ItemLink,
   BoxProfile,
-  ProfileStyle,
   HR,
-  NotificationStyle,
   TextProfile,
   BoxHeader
 } from "./style"
@@ -34,6 +32,7 @@ import {
 //------------------------------
 export const Header = () => {
     const navigate = useNavigate()
+    const location = useLocation()
 
     const getUserInfo: any = localStorage.getItem("Trading_BackOffice")
     const isUserInfo: UserProps = JSON.parse(getUserInfo)
@@ -65,72 +64,94 @@ export const Header = () => {
     return (
         <div>
             <HeaderContainer style={{backgroundColor: Color.BLUE_DARK}}>
-            <BoxHeaderStart>
-              <div>
-                <BoxLogo>
-                  <Link to = "/">
-                    <IconViewer
-                      src={logo}
-                      alt={"LogoImage"}
-                      style={{ width: "120px", height: "35px" }}
-                    />
-                  </Link>
-                </BoxLogo>
-              </div>
-            </BoxHeaderStart>
+              <BoxHeaderStart>
+                <div>
+                  <BoxLogo>
+                    <Link to = "/">
+                      <IconViewer
+                        src={logo}
+                        alt={"LogoImage"}
+                        style={{ width: "120px", height: "35px" }}
+                      />
+                    </Link>
+                  </BoxLogo>
+                </div>
+              </BoxHeaderStart>
 
-            <BoxHeader>
-              <ItemLink 
-                style={{marginRight: "20px"}}
-                to={"/orders"}  
-              >
-                Orders
-              </ItemLink>
-              <ItemLink style={{marginRight: "20px"}}>
-                Clearing House
-                </ItemLink>
-              <ItemLink style={{marginRight: "20px"}}>
-                Settlement Centre
-                </ItemLink>
-            </BoxHeader>
-            
-            <BoxHeaderEnd>
-              <ItemLink style = {{fontSize: "12px"}}>
-                    Rate
-                </ItemLink>               
-              <ItemLink style = {{fontSize: "12px"}}>
-                    Customers
-                </ItemLink>               
-              <ItemLink style = {{fontSize: "12px"}}>
-                    Reports
-                </ItemLink>               
-              <ItemLink style = {{fontSize: "12px"}}>
-                    Configuration
-                </ItemLink>               
-                <HR />
-                <NotificationStyle /> 
-                <Notification size="16" color={Color.WHITE}/>
-                <BoxProfile
-                    style={{ cursor: "pointer" }}
-                    onClick={handleProfileModal}
+              <BoxHeader>
+                <ItemLink
+                  style={{marginRight: "20px"}}
+                  to={"/orders"}
                 >
-                  <ProfileStyle/>
-                    <TextProfile> {userName} </TextProfile>
-                    <ProfileCircle size="16" color={Color.WHITE}/>
-                </BoxProfile>
-                <HR />
+                  Orders
+                </ItemLink>
+                <ItemLink
+                  style={{marginRight: "20px"}}
+                  to={"/clearingHouse"}
+                >
+                  Clearing House
+                </ItemLink>
+                <ItemLink
+                  style={{marginRight: "20px"}}
+                  to={"/settlementCentre"}
+                >
+                  Settlement Centre
+                </ItemLink>
+              </BoxHeader>
+            
+              <BoxHeaderEnd>
                 <ItemLink
                   style = {{fontSize: "12px"}}
+                  to={"/rate"}
+                >
+                  Rate
+                </ItemLink>
+                <ItemLink
+                  style = {{fontSize: "12px"}}
+                  to={"/customers"}
+                >
+                  Customers
+                </ItemLink>
+                <ItemLink
+                  style = {{fontSize: "12px"}}
+                  to={"/reports"}
+                >
+                  Reports
+                </ItemLink>
+                <ItemLink
+                  style = {{fontSize: "12px"}}
+                  to={"/configuration"}
+                >
+                  Configuration
+                </ItemLink>
+                          
+                <HR />
+
+                <BoxProfile>
+                  <Notification size="18" color={Color.WHITE}/>
+                </BoxProfile>
+                <BoxProfile
+                  style={{ cursor: "pointer" }}
                   onClick={handleLogout}
                 >
-                    Logout
-                </ItemLink>               
-            </BoxHeaderEnd>
+                  <TextProfile> Logout </TextProfile>
+                </BoxProfile>
+
+                <HR />
+
+                <BoxProfile
+                  style={{ cursor: "pointer" }}
+                  onClick={handleProfileModal}
+                >
+                  <ProfileCircle size="16" color={Color.WHITE}/>
+                  <TextProfile> {userName} </TextProfile>
+                </BoxProfile>
+              </BoxHeaderEnd>
             </HeaderContainer>
 
             <ProfileModal
-                open={openProfileModal}
-                handleClose={handleCloseProfileModal}
+              open={openProfileModal}
+              handleClose={handleCloseProfileModal}
             />
         </div>
     )

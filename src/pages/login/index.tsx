@@ -5,6 +5,7 @@ import { GridCol, GridContainer, GridRow }  from "src/components/core/Grid"
 import { BtnComponent }                     from "src/components/core/Button"
 import { IconViewer }                       from "src/components/core/IconViewer"
 import { InputText }                        from "src/components/core/Input/InputText"
+
 import { Color }                            from "src/definition/color"
 
 import { LoginService } from "src/services/loginServices"
@@ -19,7 +20,6 @@ import {
   StyleMainBox,
   StyledMobileView
 } from "./style"
-import { log } from "console"
 
 //------------------------------
 //---Login

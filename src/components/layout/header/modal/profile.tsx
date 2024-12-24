@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux"
 import Modal from "@mui/material/Modal"
 import Box from "@mui/material/Box"
 
-import { clearIsRefresh } from "src/store/actions/root"
 import { BtnComponent }   from "src/components/core/Button"
 import { Typography }     from "src/components/core/Typography"
 import { IconViewer }     from "src/components/core/IconViewer"
@@ -17,6 +16,8 @@ import { Color }    from "src/definition/color"
 import { ChangePassword } from "src/services/loginServices"
 
 import InfoClose from "src/assets/svg/close.svg"
+
+import { clearIsRefresh } from "src/store/actions/root"
 
 import{
   BoxFooter,

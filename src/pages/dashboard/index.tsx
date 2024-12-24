@@ -1,18 +1,27 @@
+import { Scanning } from "iconsax-react"
 
 import {
     BoxHeader,
+    BoxTitle,
+    BoxSide,
     Name
 } from "../style"
 
-
 //------------------------------
-//---Dashboard
+//---Orders Header
 //------------------------------
 export const Dashboard = () => {
     return (
         <div>
             <BoxHeader>
-                <Name>Dashboard</Name>
+                <BoxTitle>
+                    <BoxSide></BoxSide>
+                    <Scanning
+                        size="20"
+                        color="#808080"
+                    />                  
+                    <Name>Dashboard</Name>
+                </BoxTitle>
             </BoxHeader>
         </div>
     )
