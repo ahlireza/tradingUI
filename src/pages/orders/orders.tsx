@@ -1,4 +1,4 @@
-import { OrdersHeader } from "./header"
+import { OrdersHeader } from "./header/index"
 
 //------------------------------
 //---All Orders

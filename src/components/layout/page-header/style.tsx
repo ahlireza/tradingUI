@@ -54,13 +54,6 @@ export const Name = styled(Typography)`
   margin-left: 1vw;
 `;
 
-//------------------------------
-export const MainContainer = styled.main`
-  margin-top: 70px;
-  display: flex;
-  justify-content: left;
-`;
-
 export const ItemLink = styled(Link) <{ active: boolean }>`
     text-decoration: none;
     color: ${({ active }) => (active ? "#FF9664" : "#646464")};

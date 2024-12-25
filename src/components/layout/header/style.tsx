@@ -6,12 +6,12 @@ import { CustomBox }    from "src/components/core/CustomBox"
 
 //------------------------------
 export const HeaderContainer = styled.header`
+    width: calc(100% - 20px);
     height: 70px;
     border-radius: 0;
     position: fixed;
     top: 0;
     right: 0;
-    width: calc(100% - 20px);
     display: flex;
     align-items: center;
     justify-content: space-between;

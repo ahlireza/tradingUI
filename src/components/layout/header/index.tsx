@@ -81,19 +81,19 @@ export const Header = () => {
               <BoxHeader>
                 <ItemLink
                   style={{marginRight: "20px"}}
-                  to={"/orders"}
+                  to={"/new-order"}
                 >
                   Orders
                 </ItemLink>
                 <ItemLink
                   style={{marginRight: "20px"}}
-                  to={"/clearingHouse"}
+                  to={"/clearing"}
                 >
                   Clearing House
                 </ItemLink>
                 <ItemLink
                   style={{marginRight: "20px"}}
-                  to={"/settlementCentre"}
+                  to={"/waiting-settlement"}
                 >
                   Settlement Centre
                 </ItemLink>

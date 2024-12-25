@@ -14,6 +14,11 @@ import { PendingOrders }    from "src/pages/orders/pending"
 import { NewOrder }         from "src/pages/orders/new-order"
 import { Orders }           from "src/pages/orders/orders"
 
+import { Clearing } from "src/pages/clearing"
+
+import { WaitingSettlement }      from "src/pages/settlement/waiting"
+import { ConfirmationSettlement } from "src/pages/settlement/confirmation"
+
 //------------------------------
 //---Implementation Routes
 //------------------------------
@@ -45,7 +50,12 @@ import { Orders }           from "src/pages/orders/orders"
             <Route path="/pending-orders" element={<PendingOrders />} />
             <Route path="/suspended-orders" element={<SuspendedOrders />} />
             <Route path="/cancelled-orders" element={<CancelledOrders />} />
-            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders" element={<Orders />} />            
+
+            <Route path="/clearing" element={<Clearing />} />
+
+            <Route path="/waiting-settlement" element={<WaitingSettlement />} />
+            <Route path="/confirmation-settlement" element={<ConfirmationSettlement />} />
           </Routes>
         </Layout>
       ): (

@@ -1,15 +1,12 @@
-import { I3Square } from "iconsax-react"
+import { MoneyRecive } from "iconsax-react"
 
 import { PageHeader } from "src/components/layout/page-header"
 
 //------------------------------
-export const OrdersHeader = () => {
+export const SettlementHeader = () => {
     const links = [
-        { to: "/new-order", label: "New Order" },
-        { to: "/pending-orders", label: "Pending" },
-        { to: "/suspended-orders", label: "Suspended" },
-        { to: "/cancelled-orders", label: "Cancelled" },
-        { to: "/orders", label: "All" },
+        { to: "/waiting-settlement", label: "Waiting" },
+        { to: "/confirmation-settlement", label: "Confirmation" },
     ]
 
     //------------------------------
@@ -21,9 +18,9 @@ export const OrdersHeader = () => {
 
     //------------------------------
     return (
-        <PageHeader
-            icon={I3Square}
-            name="Orders"
+        <PageHeader        
+            icon={MoneyRecive}
+            name="Settlement"
             links={links}
             onSearch={handleSearch}
         />
