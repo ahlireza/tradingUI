@@ -19,10 +19,21 @@ import { Clearing } from "src/pages/clearing"
 import { ConfirmationSettlement } from "src/pages/settlement/confirmation"
 import { WaitingSettlement }      from "src/pages/settlement/waiting"
 
-import { UserOverview}  from "src/pages/customers/overview"
+import { Rate}  from "src/pages/rate/"
+
+import { UserOverview }  from "src/pages/customers/overview"
 import { UserProfile }  from "src/pages/customers/profile"
 import { UserOrders }   from "src/pages/customers/orders"
 import { UserCredit }   from "src/pages/customers/credit"
+
+import { TreasuryReports }   from "src/pages/reports/treasury"
+import { DealsReports }   from "src/pages/reports/deals"
+import { PaymentsReports }   from "src/pages/reports/payments"
+import { AMLReports }   from "src/pages/reports/aml"
+
+import { CurrencyConfig }   from "src/pages/configuration/currency"
+import { CountryConfig }   from "src/pages/configuration/country"
+import { UserConfig }   from "src/pages/configuration/user"
 
 //------------------------------
 //---Implementation Routes
@@ -62,10 +73,21 @@ import { UserCredit }   from "src/pages/customers/credit"
             <Route path="/waiting-settlement" element={<WaitingSettlement />} />
             <Route path="/confirmation-settlement" element={<ConfirmationSettlement />} />
 
+            <Route path="/rate" element={<Rate />} />
+
             <Route path="/overview-customer" element={<UserOverview />} />
             <Route path="/orders-customer" element={<UserOrders />} />
             <Route path="/credit" element={<UserCredit />} />
             <Route path="/profile" element={<UserProfile />} />
+
+            <Route path="/treasury-reports" element={<TreasuryReports />} />
+            <Route path="/deal-reports" element={<DealsReports />} />
+            <Route path="/payments-reports" element={<PaymentsReports />} />
+            <Route path="/aml-reports" element={<AMLReports />} />
+
+            <Route path="/currency-config" element={<CurrencyConfig />} />
+            <Route path="/countries-config" element={<CountryConfig />} />
+            <Route path="/users-configs" element={<UserConfig />} />
           </Routes>
         </Layout>
       ): (

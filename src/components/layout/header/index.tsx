@@ -114,13 +114,13 @@ export const Header = () => {
                 </ItemLink>
                 <ItemLink
                   style = {{fontSize: "12px"}}
-                  to={"/reports"}
+                  to={"/treasury-reports"}
                 >
                   Reports
                 </ItemLink>
                 <ItemLink
                   style = {{fontSize: "12px"}}
-                  to={"/configuration"}
+                  to={"/currency-config"}
                 >
                   Configuration
                 </ItemLink>

@@ -1,4 +1,4 @@
-import { MoneyRecive } from "iconsax-react"
+import { WalletAdd } from "iconsax-react"
 
 import { PageHeader } from "src/components/layout/page-header"
 
@@ -35,7 +35,7 @@ export const SettlementHeader = () => {
     //------------------------------
     return (
         <PageHeader        
-            icon={MoneyRecive}
+            icon={WalletAdd}
             name="Settlement"
             links={links}
             options = {options}

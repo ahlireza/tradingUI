@@ -14,7 +14,7 @@ export const BoxHeader = styled(CustomBox)`
 `;
 
 export const BoxTitle = styled(CustomBox)`
-  width: 12vw;
+  width: 15vw;
   background: #F5F5F5;
   display: flex;
   justify-content: flex-start;
@@ -28,7 +28,7 @@ export const BoxSide = styled(CustomBox)`
 `;
 
 export const BoxMenu = styled(CustomBox)`
-  width: 68vw;
+  width: 65vw;
   height: 55px;
   display: flex;
   justify-content: flex-start;
