@@ -108,7 +108,7 @@ export const Header = () => {
                 </ItemLink>
                 <ItemLink
                   style = {{fontSize: "12px"}}
-                  to={"/customers"}
+                  to={"/overview-customer"}
                 >
                   Customers
                 </ItemLink>

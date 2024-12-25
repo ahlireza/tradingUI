@@ -1,15 +1,14 @@
-import { I3Square } from "iconsax-react"
+import { User } from "iconsax-react"
 
 import { PageHeader } from "src/components/layout/page-header"
 
 //------------------------------
-export const OrdersHeader = () => {
+export const CustomersHeader = () => {
     const links = [
-        { to: "/new-order", label: "New Order" },
-        { to: "/pending-orders", label: "Pending" },
-        { to: "/suspended-orders", label: "Suspended" },
-        { to: "/cancelled-orders", label: "Cancelled" },
-        { to: "/orders", label: "All" },
+        { to: "/overview-customer", label: "Overview" },
+        { to: "/orders-customer", label: "Orders" },
+        { to: "/credit", label: "Credit" },
+        { to: "/profile", label: "Profile" },
     ]
 
     //------------------------------
@@ -22,8 +21,8 @@ export const OrdersHeader = () => {
     //------------------------------
     return (
         <PageHeader
-            icon = {I3Square}
-            name = "Orders"
+            icon = {User}
+            name = "Customers"
             links = {links}
             showOptions = {false}
             onSearch = {handleSearch}

@@ -16,8 +16,13 @@ import { Orders }           from "src/pages/orders/orders"
 
 import { Clearing } from "src/pages/clearing"
 
-import { WaitingSettlement }      from "src/pages/settlement/waiting"
 import { ConfirmationSettlement } from "src/pages/settlement/confirmation"
+import { WaitingSettlement }      from "src/pages/settlement/waiting"
+
+import { UserOverview}  from "src/pages/customers/overview"
+import { UserProfile }  from "src/pages/customers/profile"
+import { UserOrders }   from "src/pages/customers/orders"
+import { UserCredit }   from "src/pages/customers/credit"
 
 //------------------------------
 //---Implementation Routes
@@ -56,6 +61,11 @@ import { ConfirmationSettlement } from "src/pages/settlement/confirmation"
 
             <Route path="/waiting-settlement" element={<WaitingSettlement />} />
             <Route path="/confirmation-settlement" element={<ConfirmationSettlement />} />
+
+            <Route path="/overview-customer" element={<UserOverview />} />
+            <Route path="/orders-customer" element={<UserOrders />} />
+            <Route path="/credit" element={<UserCredit />} />
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </Layout>
       ): (

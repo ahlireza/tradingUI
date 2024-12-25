@@ -1,7 +1,7 @@
-import { OrdersHeader } from "./header/index"
+import { OrdersHeader } from "./header"
 
 //------------------------------
-//---Cancelle Orders
+//---Cancelled Orders
 //------------------------------
 export const CancelledOrders = () => {
     return (

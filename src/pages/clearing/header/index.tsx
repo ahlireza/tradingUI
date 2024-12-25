@@ -1,13 +1,10 @@
-import { MoneyRecive } from "iconsax-react"
+import { Share } from "iconsax-react"
 
 import { PageHeader } from "src/components/layout/page-header"
 
 //------------------------------
-export const SettlementHeader = () => {
-    const links = [
-        { to: "/waiting-settlement", label: "Waiting" },
-        { to: "/confirmation-settlement", label: "Confirmation" },
-    ]
+export const ClearingHeader = () => {
+    const links = []
     const options = [
         { label: "AUD", value: "AUD" },
         { label: "IRR", value: "IRR" },
@@ -34,15 +31,15 @@ export const SettlementHeader = () => {
 
     //------------------------------
     return (
-        <PageHeader        
-            icon={MoneyRecive}
-            name="Settlement"
-            links={links}
+        <PageHeader
+            icon = {Share}
+            name = "Clearing"
+            links = {links}
             options = {options}
             optionsLabel = "Currency"
             onOptions = {handleCurrency}
             showOptions = {true}
-            onSearch={handleSearch}
+            onSearch = {handleSearch}
         />
     )
 }

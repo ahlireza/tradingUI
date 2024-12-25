@@ -35,6 +35,15 @@ export const BoxMenu = styled(CustomBox)`
   align-items: center;
 `;
 
+export const BoxOptions = styled(CustomBox)`
+  width: 20vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-left: Auto;
+`;
+
 export const BoxSearch = styled(CustomBox)`
   width: 20vw;
   background: #FFFFFF;
