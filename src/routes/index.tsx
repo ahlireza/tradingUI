@@ -21,10 +21,11 @@ import { WaitingSettlement }      from "src/pages/settlement/waiting"
 
 import { Rate}  from "src/pages/rate/"
 
-import { UserOverview }  from "src/pages/customers/overview"
-import { UserProfile }  from "src/pages/customers/profile"
-import { UserOrders }   from "src/pages/customers/orders"
-import { UserCredit }   from "src/pages/customers/credit"
+import { Customers }      from "src/pages/customers/"
+import { UserOverview }   from "src/pages/customer/overview"
+import { UserProfile }    from "src/pages/customer/profile"
+import { UserOrders }     from "src/pages/customer/orders"
+import { UserCredit }     from "src/pages/customer/credit"
 
 import { TreasuryReports }   from "src/pages/reports/treasury"
 import { DealsReports }   from "src/pages/reports/deals"
@@ -75,6 +76,7 @@ import { UserConfig }   from "src/pages/configuration/user"
 
             <Route path="/rate" element={<Rate />} />
 
+            <Route path="/customers" element={<Customers />} />
             <Route path="/overview-customer" element={<UserOverview />} />
             <Route path="/orders-customer" element={<UserOrders />} />
             <Route path="/credit" element={<UserCredit />} />

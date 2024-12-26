@@ -1,10 +1,15 @@
-import { UserSquare } from "iconsax-react"
+import { User } from "iconsax-react"
 
 import { PageHeader } from "src/components/layout/page-header"
 
 //------------------------------
-export const CustomersHeader = () => {
-    const links = []
+export const CustomerHeader = () => {
+    const links = [
+        { to: "/overview-customer", label: "Overview" },
+        { to: "/orders-customer", label: "Orders" },
+        { to: "/credit", label: "Credit" },
+        { to: "/profile", label: "Profile" },
+    ]
 
     //------------------------------
     //---Handle Search
@@ -16,8 +21,8 @@ export const CustomersHeader = () => {
     //------------------------------
     return (
         <PageHeader
-            icon = {UserSquare}
-            name = "Customers"
+            icon = {User}
+            name = "Customer"
             links = {links}
             showOptions = {false}
             onSearch = {handleSearch}

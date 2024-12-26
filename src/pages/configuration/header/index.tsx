@@ -21,7 +21,7 @@ export const ConfigHeader = () => {
     return (
         <PageHeader
             icon = {Task}
-            name = "Configuratuion"
+            name = "Configuration"
             links = {links}
             showOptions = {false}
             onSearch = {handleSearch}

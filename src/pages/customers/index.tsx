@@ -1,9 +1,9 @@
 import { CustomersHeader } from "./header"
 
 //------------------------------
-//---User Profile
+//---Customers
 //------------------------------
-export const UserProfile = () => {
+export const Customers = () => {
     return (
         <CustomersHeader />
     )

@@ -14,7 +14,7 @@ export const BoxHeader = styled(CustomBox)`
 `;
 
 export const BoxTitle = styled(CustomBox)`
-  width: 15vw;
+  width: 12vw;
   background: #F5F5F5;
   display: flex;
   justify-content: flex-start;
@@ -28,7 +28,7 @@ export const BoxSide = styled(CustomBox)`
 `;
 
 export const BoxMenu = styled(CustomBox)`
-  width: 65vw;
+  width: 68vw;
   height: 55px;
   display: flex;
   justify-content: flex-start;
@@ -57,15 +57,15 @@ export const BoxSearch = styled(CustomBox)`
 export const Name = styled(Typography)`
   color: #000000;
   font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 0.5px;
   margin-left: 1vw;
 `;
 
 export const ItemLink = styled(Link) <{ active: boolean }>`
     text-decoration: none;
-    color: ${({ active }) => (active ? "#FF9664" : "#646464")};
+    color: ${({ active }) => (active ? "#966432" : "#646464")};
     font-size: 14px;
     font-style: normal;
     margin: 0 0 0 20px;

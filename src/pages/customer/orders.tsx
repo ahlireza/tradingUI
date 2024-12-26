@@ -1,10 +1,10 @@
-import { CustomersHeader } from "./header"
+import { CustomerHeader } from "./header"
 
 //------------------------------
 //---User Orders
 //------------------------------
 export const UserOrders = () => {
     return (
-        <CustomersHeader />
+        <CustomerHeader />
     )
 }
