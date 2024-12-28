@@ -5,10 +5,10 @@ import { CustomBox }    from "src/components/core/CustomBox"
 
 //------------------------------
 export const RowContainer = styled(CustomBox)`
-  width: 100vw;
+  width: 99vw;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
 `;
 
 export const BoxTitle = styled(CustomBox)`
@@ -83,7 +83,6 @@ export const Header = styled(Typography)`
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  margin-left: 1vw;
 `;
 
 export const Title = styled(Typography)`
@@ -101,5 +100,4 @@ export const Content = styled(Typography)`
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  margin-left: 1vw;
 `;

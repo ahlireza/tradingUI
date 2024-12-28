@@ -1,4 +1,4 @@
-import { useNavigate, Link, useLocation }  from "react-router-dom"
+import { useNavigate, Link }  from "react-router-dom"
 import { useState } from "react"
 import Cookies      from "js-cookie"
 
@@ -9,7 +9,7 @@ import { ProfileModal }     from "./modal/profile"
 
 import { IconViewer } from "src/components/core/IconViewer"
 
-import {UserProps}  from "src/definition/interfaces"
+import { UserProps}  from "src/definition/interfaces"
 import { Color }    from "src/definition/color"
 
 
@@ -32,7 +32,6 @@ import {
 //------------------------------
 export const Header = () => {
     const navigate = useNavigate()
-    const location = useLocation()
 
     const getUserInfo: any = localStorage.getItem("Trading_BackOffice")
     const isUserInfo: UserProps = JSON.parse(getUserInfo)

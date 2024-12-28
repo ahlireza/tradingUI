@@ -1,12 +1,12 @@
-import Cookies                  from "js-cookie"
-import { useEffect }            from "react"
-import { Route, Routes }        from "react-router-dom"
 import { Navigate, useNavigate} from "react-router-dom"
+import { Route, Routes }        from "react-router-dom"
+import { useEffect }            from "react"
+import Cookies                  from "js-cookie"
 
 import { Layout }       from "src/components/layout" 
-import { Login }        from "src/pages/login" 
 
-import { Dashboard }  from "src/pages/dashboard"
+import { Dashboard }        from "src/pages/dashboard"
+import { Login }            from "src/pages/login" 
 
 import { CancelledOrders }  from "src/pages/orders/cancelled"
 import { SuspendedOrders }  from "src/pages/orders/suspended"
@@ -21,20 +21,20 @@ import { WaitingSettlement }      from "src/pages/settlement/waiting"
 
 import { Rate}  from "src/pages/rate/"
 
-import { Customers }      from "src/pages/customers/"
-import { UserOverview }   from "src/pages/customer/overview"
-import { UserProfile }    from "src/pages/customer/profile"
-import { UserOrders }     from "src/pages/customer/orders"
-import { UserCredit }     from "src/pages/customer/credit"
+import { UserOverview } from "src/pages/customer/overview"
+import { UserProfile }  from "src/pages/customer/profile"
+import { UserOrders }   from "src/pages/customer/orders"
+import { UserCredit }   from "src/pages/customer/credit"
+import { Customers }    from "src/pages/customers/"
 
-import { TreasuryReports }   from "src/pages/reports/treasury"
-import { DealsReports }   from "src/pages/reports/deals"
-import { PaymentsReports }   from "src/pages/reports/payments"
-import { AMLReports }   from "src/pages/reports/aml"
+import { TreasuryReports }  from "src/pages/reports/treasury"
+import { PaymentsReports }  from "src/pages/reports/payments"
+import { DealsReports }     from "src/pages/reports/deals"
+import { AMLReports }       from "src/pages/reports/aml"
 
-import { CurrencyConfig }   from "src/pages/configuration/currency"
-import { CountryConfig }   from "src/pages/configuration/country"
-import { UserConfig }   from "src/pages/configuration/user"
+import { CurrencyConfig } from "src/pages/configuration/currency"
+import { CountryConfig }  from "src/pages/configuration/country"
+import { UserConfig }     from "src/pages/configuration/user"
 
 //------------------------------
 //---Implementation Routes

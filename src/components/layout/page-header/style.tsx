@@ -6,7 +6,7 @@ import { CustomBox }    from "src/components/core/CustomBox"
 
 //------------------------------
 export const BoxHeader = styled(CustomBox)`
-  width: 100vw;
+  width: 99vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,12 +24,12 @@ export const BoxTitle = styled(CustomBox)`
 export const BoxSide = styled(CustomBox)`
   height: 50px;
   border: 3px solid #966432;
-  margin-right: 10px;
+  margin-right: 1vw;
 `;
 
 export const BoxMenu = styled(CustomBox)`
   width: 68vw;
-  height: 55px;
+  height: 3vw;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -68,7 +68,7 @@ export const ItemLink = styled(Link) <{ active: boolean }>`
     color: ${({ active }) => (active ? "#966432" : "#646464")};
     font-size: 14px;
     font-style: normal;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 1vw;
     font-family: Montserrat;
     font-weight:${({ active }) => (active ? "700" : "500")};
 `;
