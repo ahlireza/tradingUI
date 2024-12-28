@@ -2,8 +2,9 @@ import { useNavigate, Link }  from "react-router-dom"
 import { useState } from "react"
 import Cookies      from "js-cookie"
 
-import { Notification } from "iconsax-react"
-import { ProfileCircle } from "iconsax-react"
+import { ProfileCircle }  from "iconsax-react"
+import { Notification }   from "iconsax-react"
+import { Home }           from "iconsax-react"
 
 import { ProfileModal }     from "./modal/profile"
 
@@ -17,14 +18,12 @@ import logo from "src/assets/logo.png"
 
 import {
   HeaderContainer,
-  BoxHeaderStart,
-  BoxHeaderEnd,
+  BoxHeader,
   BoxLogo,
   ItemLink,
   BoxProfile,
   HR,
-  TextProfile,
-  BoxHeader
+  TextProfile
 } from "./style"
 
 //------------------------------
@@ -63,42 +62,47 @@ export const Header = () => {
     return (
         <div>
             <HeaderContainer style={{backgroundColor: Color.BLUE_DARK}}>
-              <BoxHeaderStart>
+              <BoxHeader>
                 <div>
                   <BoxLogo>
                     <Link to = "/">
                       <IconViewer
                         src={logo}
                         alt={"LogoImage"}
-                        style={{ width: "120px", height: "35px" }}
+                        style={{ width: "8vw", height: "2.5vw" }}
                       />
                     </Link>
                   </BoxLogo>
                 </div>
-              </BoxHeaderStart>
+              </BoxHeader>
 
-              <BoxHeader>
-                <ItemLink
-                  style={{marginRight: "20px"}}
+              <BoxHeader style={{width: "60vw", marginLeft: "1vw"}}>
+                <BoxProfile>
+                  <Link to = "/">
+                    <Home size="20" color={Color.WHITE}/>
+                  </Link>
+                </BoxProfile>
+              <ItemLink
+                  style={{marginRight: "1vw"}}
                   to={"/new-order"}
                 >
                   Orders
                 </ItemLink>
                 <ItemLink
-                  style={{marginRight: "20px"}}
+                  style={{marginRight: "1vw"}}
                   to={"/clearing"}
                 >
                   Clearing House
                 </ItemLink>
                 <ItemLink
-                  style={{marginRight: "20px"}}
+                  style={{marginRight: "1vw"}}
                   to={"/waiting-settlement"}
                 >
                   Settlement Centre
                 </ItemLink>
               </BoxHeader>
             
-              <BoxHeaderEnd>
+              <BoxHeader>
                 <ItemLink
                   style = {{fontSize: "12px"}}
                   to={"/rate"}
@@ -145,7 +149,7 @@ export const Header = () => {
                   <ProfileCircle size="16" color={Color.WHITE}/>
                   <TextProfile> {userName} </TextProfile>
                 </BoxProfile>
-              </BoxHeaderEnd>
+              </BoxHeader>
             </HeaderContainer>
 
             <ProfileModal

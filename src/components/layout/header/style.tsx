@@ -19,19 +19,19 @@ export const HeaderContainer = styled.header`
     z-index:10;
 `;
 
-export const BoxHeaderStart = styled(CustomBox)`
-    margin:0 0;
-`;
+// export const BoxHeaderStart = styled(CustomBox)`
+//     margin:0 0;
+// `;
+
+// export const BoxHeader = styled(CustomBox)`
+//     width: 60vw;
+//     margin:0 2vw;
+// `;
 
 export const BoxHeader = styled(CustomBox)`
-    width: 60vw;
-    margin:0 2vw;
-`;
-
-export const BoxHeaderEnd = styled(CustomBox)`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
 `;
 
 export const BoxLogo = styled(CustomBox)`

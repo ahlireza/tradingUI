@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { Scanning } from "iconsax-react"
+import { Input }    from "antd"
 
-import { PieChart } from "src/components/core/chart/PieChart"
 import { CustomBox }    from "src/components/core/CustomBox"
+import { PieChart }     from "src/components/core/chart/PieChart"
 import { Color }        from "src/definition/color"
 
 import {
@@ -72,7 +73,7 @@ export const Dashboard = () => {
     const [usdirrRate, setUsdirrRate] = useState(70000)
     const [irrusdRate, setIrrusdRate] = useState(71000)
 
-    const [days, setDays] = useState(2)
+    const [days, setDays] = useState(3)
     const [audirrAverage, setAudirrAverage] = useState(44960)
     const [irraudAverage, setIrraudAverage] = useState(45760)
 
@@ -106,6 +107,7 @@ export const Dashboard = () => {
     const [audirrAfshar, setAudirrAfshar] = useState(45100)
     const [irraudAfshar, setIrraudAfshar] = useState(46200)
 
+    //---Chart
     const [currencies, setCurrencies] = useState([
         {x: "AUD", y: audBalance},
         {x: "AED", y: aedBalance/aedaudRate},
@@ -113,18 +115,18 @@ export const Dashboard = () => {
         {x: "TRL", y: trlBalance*(trlirrRate/irraudRate)},
         {x: "USD", y: usdBalance*(usdirrRate/irraudRate)}
     ])
-    const customColors = [
-        Color.BROWN_LIGHT,
-        Color.BLUE,
-        Color.YELLOW,
-        Color.GREEN,
-        Color.RED_LIGHT
-    ]
+    const audColor = Color.BLUE
+    const aedColor = Color.GREEN
+    const eurColor = Color.BROWN_LIGHT
+    const trlColor = Color.YELLOW
+    const usdColor = Color.RED_LIGHT
+    const customColors = [audColor, aedColor, eurColor, trlColor, usdColor]
 
     //------------------------------
     //---Average Days Handler
     //------------------------------
-    const daysHandler = () => {
+    const daysHandler = (e) => {
+        setDays(e.target.value)
     }
 
     //------------------------------
@@ -140,14 +142,22 @@ export const Dashboard = () => {
                     />                  
                     <Name>Dashboard</Name>
                 </BoxTitle>
-                <BoxContent style={{width: "40vw", marginTop: "10px"}}>
+                <BoxContent style={{width: "40vw", marginTop: "10px",   justifyContent: "flex-start"}}>
                     <BoxName>
-                        AUD Payment Balance: ${audReceiveBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                        AUD Payment Balance: 
+                        {/* ${audReceiveBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})} */}
+                    </BoxName>
+                    <BoxName style={{ color: Color.RED}}>
+                        ${audReceiveBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                     </BoxName>
                 </BoxContent>
-                <BoxContent style={{width: "40vw", marginTop: "10px"}}>
+                    <BoxContent style={{width: "40vw", marginTop: "10px",   justifyContent: "flex-start"}}>
                     <BoxName>
-                        IRR Payment Balance: {irrReceiveBalance.toLocaleString("en-us")}
+                        IRR Payment Balance:
+                        {irrReceiveBalance.toLocaleString("en-us")}
+                    </BoxName>
+                    <BoxName style={{ color: Color.RED}}>
+                        {irrReceiveBalance.toLocaleString("en-us")}
                     </BoxName>
                 </BoxContent>
             </RowContainer>
@@ -189,11 +199,11 @@ export const Dashboard = () => {
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", marginTop: "1vw", marginBottom: "1vw"}}>
                                 <CustomBox>
                                     <Title>Equal AUD Balance</Title>
-                                    <Content style={{marginLeft: "2vw", fontSize: "14px", color: Color.RED_LIGHT}}>
+                                    <Content style={{marginLeft: "2vw", fontSize: "14px", color: Color.RED}}>
                                         {equalAUDBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                     </Content>
                                     <Title style={{marginTop: "2vw"}}>AED Available</Title>
-                                    <Content style={{marginLeft: "2vw", fontSize: "14px", color: Color.RED_LIGHT}}>
+                                    <Content style={{marginLeft: "2vw", fontSize: "14px", color: Color.RED}}>
                                         {availableAED.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                     </Content>
                                 </CustomBox>
@@ -211,6 +221,7 @@ export const Dashboard = () => {
         {/* ---Show Equal Balance */}
                         <CustomBox>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", justifyContent: "flex-start", marginTop: "1vw"}}>
+                                <div style={{ width: "10px", height: "10px", backgroundColor: audColor}}></div>
                                 <Title style={{width: "4vw"}}>
                                     AUD
                                 </Title>
@@ -219,6 +230,7 @@ export const Dashboard = () => {
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
+                                <div style={{ width: "10px", height: "10px", backgroundColor: aedColor}}></div>
                                 <Title style={{width: "4vw"}}>
                                     AED
                                 </Title>
@@ -227,6 +239,7 @@ export const Dashboard = () => {
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
+                                <div style={{ width: "10px", height: "10px", backgroundColor: eurColor}}></div>
                                 <Title style={{width: "4vw"}}>
                                     EUR
                                 </Title>
@@ -235,6 +248,7 @@ export const Dashboard = () => {
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
+                                <div style={{ width: "10px", height: "10px", backgroundColor: trlColor}}></div>
                                 <Title style={{width: "4vw"}}>
                                     TRL
                                 </Title>
@@ -243,6 +257,7 @@ export const Dashboard = () => {
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start", marginBottom: "1vw"}}>
+                                <div style={{ width: "10px", height: "10px", backgroundColor: usdColor}}></div>
                                 <Title style={{width: "4vw"}}>
                                     USD
                                 </Title>
@@ -264,7 +279,7 @@ export const Dashboard = () => {
                                 <YellowLine>
                                     <Header>AUD / IRR</Header>
                                 </YellowLine>
-                                <Header style={{color: Color.RED_LIGHT}}>
+                                <Header style={{color: Color.RED}}>
                                     {audirrSuggestion.toLocaleString("en-us")}
                                 </Header>
                                 </BoxHeader>
@@ -288,7 +303,7 @@ export const Dashboard = () => {
                                 <YellowLine>
                                     <Header>IRR/ AUD</Header>
                                 </YellowLine>
-                                <Header style={{color: Color.RED_LIGHT}}>
+                                <Header style={{color: Color.RED}}>
                                     {irraudSuggestion.toLocaleString("en-us")}
                                 </Header>
                             </BoxHeader>
@@ -361,15 +376,16 @@ export const Dashboard = () => {
                                     justifyContent: "flex-start"
                                 }}
                             >
-                            <Title>For</Title>
-                                <Title
-                                    style={{
-                                        color: Color.RED_LIGHT,
-                                        fontSize: "14px"
+                                <Title>For</Title>
+                                <Input
+                                    size = "small"
+                                    style = {{
+                                        width: "4vw", height: "1.5vw",
+                                        marginLeft: "1vw",
+                                        fontFamily: "Montserrat", fontWeight: "600",
                                     }}
-                                >
-                                    {days}
-                                </Title>
+                                    defaultValue={days}
+                                />
                                 <Title>days</Title>
                             </BoxHeader>
                             <BoxContent style={{width: "15vw", marginRight: "2vw"}}>
