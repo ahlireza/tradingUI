@@ -1,8 +1,8 @@
-import { toast }    from "react-toastify"
+// import { toast }    from "react-toastify"
 import Cookies      from 'js-cookie'
-import axios        from 'axios'
+// import axios        from 'axios'
 
-import { BaseUrlApi } from "src/definition/domain"
+// import { BaseUrlApi } from "src/definition/domain"
 
 //------------------------------
 //---login Service

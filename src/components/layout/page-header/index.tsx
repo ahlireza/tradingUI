@@ -1,7 +1,8 @@
 import { useLocation }  from "react-router-dom"
 import { useState }     from "react"
+import { Input }        from 'antd'
 
-import { InputSearch }  from "src/components/core/Input/InputSearch"
+
 import { InputSelect }  from "src/components/core/Input/InputSelect"
 
 
@@ -54,10 +55,12 @@ export const PageHeader = ({
     showSearch = true
 }: PageHeaderProps ) => {
 
-    const location = useLocation()
     //---states
+    const location = useLocation()
     const [searchWord, setSearchWord] = useState("")
     const [selectedFilter, setSelectedFilter] = useState(options[0]?.value || "")
+
+    const { Search } = Input;
 
     //------------------------------
     //---Handle Filtering
@@ -108,13 +111,11 @@ export const PageHeader = ({
 
             <BoxSearch>
                 {showSearch && (
-                    <InputSearch
+                    <Search
                         placeholder="Search..."
-                        onChange={e => {
-                            setSearchWord(e.target.value)
-                        }}
-                        value={searchWord}
-                        onKeyUp={(e) => e.key === "Enter" && handleSearch()}
+                        onSearch={handleSearch}
+                        size = "Medium"
+                        style={{ width: "15vw" }}
                     />
                 )}
             </BoxSearch>

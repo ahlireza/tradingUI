@@ -1,10 +1,10 @@
 import { useEffect, useState }  from "react"
 import { useNavigate }          from "react-router-dom"
+import { Input, Button }        from 'antd'
+import Box                      from "@mui/material/Box"
 
 import { GridCol, GridContainer, GridRow }  from "src/components/core/Grid"
-import { BtnComponent }                     from "src/components/core/Button"
 import { IconViewer }                       from "src/components/core/IconViewer"
-import { InputText }                        from "src/components/core/Input/InputText"
 
 import { Color }                            from "src/definition/color"
 
@@ -32,8 +32,8 @@ export const Login = () => {
   const [pass, setPass] = useState("")
   const [usernameError, setUsernameError] = useState(false)
   const [passError, setPassError] = useState(false)
-  const [usernameHelper, setUsernameHelper] = useState("")
-  const [passHelper, setPassHelper] = useState("")
+  const [usernameHelper, setUsernameHelper] = useState("Your email...")
+  const [passHelper, setPassHelper] = useState("Password...")
 
   useEffect(() => {
     return () => {
@@ -86,43 +86,58 @@ export const Login = () => {
                     Welcome Back...!
                   </LoginText>
 
-                  <InputText
-                    placeholder="Your Email"
-                    type="text"
-                    onChange={e => {
-                      setUsername(e.target.value)
-                      setUsernameError(false)
-                      setUsernameHelper("")
-                    }}
-                    error={usernameError.toString()}
-                    helperText={usernameHelper}
-                    value={username}
-                     onKeyUp={(e) => e.key === "Enter" && errorHandler}
-                  />
+                  <Box style={{ width: "50vw", marginBottom: "2vw"}}>
+                    <Input
+                      placeholder={usernameHelper}
+                      size="large"
+                      style={{
+                        width: "25vw",
+                        boxShadow: usernameError ? "0 0 0 1px #780A28" : undefined
+                      }}
+                      onChange={e => {
+                        setUsername(e.target.value)
+                        setUsernameError(false)
+                        setUsernameHelper("Your email...")
+                      }}
+                      value={username}
+                    />
+                  </Box>
 
-                  <InputText
-                    placeholder="Password"
-                    type="password"
-                    onChange={event => {
-                      setPass(event.target.value);
-                      setPassError(false)
-                      setPassHelper("")
-                    }}
-                    error={passError.toString()}
-                    helperText={passHelper}
-                    value={pass}
-                    onKeyUp={(e) => e.key === "Enter" && errorHandler}
-                  />
-                  <BtnComponent
-                    onClick={errorHandler}
-                    label="Sign in"
-                    variant="contained"
+                  <Box style={{ width: "50vw", marginBottom: "1vw"}}>
+                    <Input.Password
+                      placeholder={passHelper}
+                      size="large"
+                      style={{
+                        width: "25vw",
+                        boxShadow: passError ? "0 0 0 1px #780A28" : undefined
+                      }}
+                      onChange={event => {
+                        setPass(event.target.value);
+                        setPassError(false)
+                        setPassHelper("Passwoed...")
+                      }}
+                      value={pass}
+                    />
+                  </Box>
+
+                  <Button
+                    color={Color.WHITE}
+                    variant="solid"
+                    size="large"
                     style={{
-                      marginTop: "32px",
+                      width: "25vw",
+                      fontFamily: "Montserrat",
+                      fontSize: "14px",
+                      fontWeight: "700",
                       backgroundColor: Color.BLUE_DARK,
+                      marginTop: "2vw",
                       cursor: "pointer",
                     }}
-                  />
+                    onClick={errorHandler}
+                  >
+                    Sign in
+                  </Button>
+
                 </StyleContainer>
 
               </StyleMainBox>

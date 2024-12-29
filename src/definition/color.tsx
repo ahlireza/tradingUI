@@ -3,6 +3,7 @@
 //------------------------------
 export const Color = {
     BLACK: "#000000",
+    GRAY: "#FEDEDED",
     BLUE: "#000080",
     BLUE_DARK: "#000A23",
     BROWN_LIGHT: "#966432",

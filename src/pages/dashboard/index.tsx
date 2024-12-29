@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Scanning } from "iconsax-react"
-import { Input }    from "antd"
+import { InputNumber }    from "antd"
 
 import { CustomBox }    from "src/components/core/CustomBox"
 import { PieChart }     from "src/components/core/chart/PieChart"
@@ -377,14 +377,16 @@ export const Dashboard = () => {
                                 }}
                             >
                                 <Title>For</Title>
-                                <Input
+                                <InputNumber
                                     size = "small"
+                                    defaultValue={days}
+                                    min={1}
+                                    max={365}
                                     style = {{
                                         width: "4vw", height: "1.5vw",
                                         marginLeft: "1vw",
                                         fontFamily: "Montserrat", fontWeight: "600",
                                     }}
-                                    defaultValue={days}
                                 />
                                 <Title>days</Title>
                             </BoxHeader>

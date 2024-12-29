@@ -1,14 +1,17 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch }  from "react-redux"
+import { useState }     from "react"
 // import { toast }        from "react-toastify"
 // import axios            from "axios"
-import Modal from "@mui/material/Modal"
-import Box from "@mui/material/Box"
+
+import { Input }  from 'antd'
+import Modal      from "@mui/material/Modal"
+import Box        from "@mui/material/Box"
+
 
 import { BtnComponent }   from "src/components/core/Button"
 import { Typography }     from "src/components/core/Typography"
 import { IconViewer }     from "src/components/core/IconViewer"
-import { InputText }      from "src/components/core/Input/InputText"
+// import { InputText }      from "src/components/core/Input/InputText"
 
 import {UserProps}  from "src/definition/interfaces"
 import { Color }    from "src/definition/color"
@@ -23,7 +26,8 @@ import{
   BoxFooter,
   BoxInput,
   HRBottom,
-  HRTop
+  HRTop,
+  Label
 } from "./style"
 
 type ModalProps = {
@@ -56,6 +60,8 @@ export const ProfileModal: React.FC<ModalProps> = ({
   
   const [oldPasswordHelper, setOldPasswordHelper] = useState("")
   const [passwordHelper, setPasswordHelper] = useState("")
+  
+  const [inputBG, setInputBG] = useState(Color.GRAY)
   
   //------------------------------
   //---Close Modal and Reset States
@@ -162,8 +168,8 @@ export const ProfileModal: React.FC<ModalProps> = ({
         </Box>
         <HRTop />
 
-        <BoxInput style={{ marginTop: "1em" }}>
-          <Box style={{ width: "100%" }}>
+        <BoxInput style={{ marginTop: "1vw" }}>
+          <Box style={{ width: "50vw" }}>
             <Typography
               style={{
                 color: Color.RED,
@@ -174,7 +180,7 @@ export const ProfileModal: React.FC<ModalProps> = ({
               {name}
             </Typography>
           </Box>
-          <Box style={{ width: "100%" }}>
+          <Box style={{ width: "50vw" }}>
             <Typography
               style={{
                 color: Color.BLUE,
@@ -186,9 +192,15 @@ export const ProfileModal: React.FC<ModalProps> = ({
           </Box>
         </BoxInput>
 
-        <BoxInput style={{ marginTop: "1em" }}>
-         <Box style={{ width: "100%" }}>
-            <InputText
+        <BoxInput style={{ marginTop: "1vw" }}>
+          <Box style={{ width: "50vw" }}>
+            <Label>Old Password</Label>
+            <Input.Password
+              placeholder="Old password..."
+              size = "large"
+              style={{ width: "20vw"}}
+            />
+            {/* <InputText
               style={{ height: "24px", width: "85%" }}
               label="Old Password"
               placeholder=""
@@ -204,13 +216,20 @@ export const ProfileModal: React.FC<ModalProps> = ({
               error={oldPasswordError.toString()}
               helperText={oldPasswordHelper}
               value={oldPassword}
-            />
+            /> */}
           </Box>
-          <Box style={{ width: "100%" }}></Box>
+          {/* <Box style={{ width: "100%" }}></Box> */}
         </BoxInput>
 
-        <BoxInput style={{ marginTop: "1em" }}>
-        <Box style={{ width: "100%" }}>
+        <BoxInput style={{ marginTop: "1vw", marginBottom: "2vw"}}>
+          <Box style={{ width: "50vw" }}>
+              <Label>New Password</Label>
+              <Input.Password
+                placeholder="New password..."
+                size = "large"
+                style={{ width: "20vw"}}
+              />
+        {/* <Box style={{ width: "100%" }}>
             <InputText
               style={{ height: "24px", width: "85%" }}
               label="New Password"
@@ -223,9 +242,16 @@ export const ProfileModal: React.FC<ModalProps> = ({
               }}
               error={passwordError.toString()}
               helperText={passwordHelper}
-            />
+            /> */}
           </Box>
-          <Box style={{ width: "100%" }}>
+            <Box style={{ width: "50vw" }}>
+              <Label>Confirm Password</Label>
+              <Input.Password
+                placeholder="Confirm password..."
+                size = "large"
+                style={{ width: "20vw"}}
+              />
+          {/* <Box style={{ width: "100%" }}>
             <InputText
               style={{ height: "24px", width: "85%", marginLeft: "7px" }}
               label="Confirm Password"
@@ -239,7 +265,7 @@ export const ProfileModal: React.FC<ModalProps> = ({
               error={passwordError.toString()}
               helperText={passwordHelper}
               value={confirmPassword}
-            />
+            /> */}
           </Box>
         </BoxInput>
 
