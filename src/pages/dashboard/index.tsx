@@ -1,10 +1,17 @@
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { Scanning } from "iconsax-react"
-import { InputNumber }    from "antd"
+import { Helmet }   from "react-helmet"
+
+import { AppDispatch, RootState }   from "@/store"
+import { updateDays }               from "src/store/actions/rates"
+
+import { Input, InputNumber }    from "antd"
 
 import { CustomBox }    from "src/components/core/CustomBox"
 import { PieChart }     from "src/components/core/chart/PieChart"
 import { Color }        from "src/definition/color"
+import { FormatNumber } from "src/components/common/format"
 
 import {
     BoxTitle,
@@ -25,13 +32,17 @@ import {
 //---Orders Header
 //------------------------------
 export const Dashboard = () => {
+    const dispatch = useDispatch<AppDispatch>()
+
     //---State
+    const rate = useSelector((state: RootState) => state.rates)
+
+    //---Balance
     const [audReceiveBalance, setAudReceiveBalance] = useState(243279)
     const [audUrgentBalance, setAudUrgentBalance] = useState(89000)
     const [irrReceiveBalance, setIrrReceiveBalance] = useState(45789250000)
     const [irrUrgentBalance, setIrrUrgentBalance] = useState(10000000000)
 
-    //---Balance
     const [equalAUDBalance, setEqualAUDBalance] = useState(10074898)
     const [availableAED, setAvailableAED] = useState(270345)
 
@@ -61,51 +72,59 @@ export const Dashboard = () => {
     const [usdTehran, setUsdTehran] = useState(40000)
 
     //---Rate
-    const [audirrRate, setAudirrRate] = useState(45000)
-    const [irraudRate, setIrraudRate] = useState(46000)
-    const [aedaudRate, setAedaudRate] = useState(2.39)
-    const [aedirrRate, setAedirrRate] = useState(20000)
-    const [irraedRate, setIrraedRate] = useState(20300)
-    const [eurirrRate, setEurirrRate] = useState(79000)
-    const [irreurRate, setIrreurRate] = useState(80000)
-    const [trlirrRate, setTrlirrRate] = useState(22500)
-    const [irrtrlRate, setIrrtrlRate] = useState(23000)
-    const [usdirrRate, setUsdirrRate] = useState(70000)
-    const [irrusdRate, setIrrusdRate] = useState(71000)
+    const [audirrRate, setAudirrRate] = useState(rate.audirrRate)
+    const [irraudRate, setIrraudRate] = useState(rate.irraudRate)
 
-    const [days, setDays] = useState(3)
-    const [audirrAverage, setAudirrAverage] = useState(44960)
-    const [irraudAverage, setIrraudAverage] = useState(45760)
+    const [audaedRate, setAudaedRate] = useState(rate.audaedRate)
+    const [aedaudRate, setAedaudRate] = useState(rate.aedaudRate)
+    const [audeurRate, setAudeurRate] = useState(rate.audeurRate)
+    const [euraudRate, setEuraudRate] = useState(rate.euraudRate)
+    const [audusdRate, setAudusdRate] = useState(rate.audusdRate)
+    const [usdaudRate, setUsdaudRate] = useState(rate.usdaudRate)
+
+    const [aedirrRate, setAedirrRate] = useState(rate.aedirrRate)
+    const [irraedRate, setIrraedRate] = useState(rate.irraedRate)
+    const [eurirrRate, setEurirrRate] = useState(rate.eurirrRate)
+    const [irreurRate, setIrreurRate] = useState(rate.irreurRate)
+    const [trlirrRate, setTrlirrRate] = useState(rate.trlirrRate)
+    const [irrtrlRate, setIrrtrlRate] = useState(rate.irrtrlRate)
+    const [usdirrRate, setUsdirrRate] = useState(rate.usdirrRate)
+    const [irrusdRate, setIrrusdRate] = useState(rate.irrusdRate)
+
+    const [days, setDays] = useState(rate.days)
+    const [audirrAverage, setAudirrAverage] = useState(0)
+    const [irraudAverage, setIrraudAverage] = useState(0)
 
     //---Suggestion
-    const [audirrSuggestion, setAudirrSuggestion] = useState(45200)
-    const [audirrSell, setAudirrSell] = useState(45300)
-    const [audirrAED, setAudirrAED] = useState(45900)
-    const [audirrMarket, setAudirrMarket] = useState(45100)
-    const [irraudSuggestion, setIrraudSuggestion] = useState(46200)
-    const [irraudSell, setIrraudSell] = useState(46300)
-    const [irraudAED, setIrraudAED] = useState(46900)
-    const [irraudMarket, setIrraudMarket] = useState(46500)
+    const [audirrSuggestion, setAudirrSuggestion] = useState(0)
+    const [audirrSell, setAudirrSell] = useState(0)
+    const [audirrAED, setAudirrAED] = useState(0)
+    const [audirrMarket, setAudirrMarket] = useState(0)
+    const [irraudSuggestion, setIrraudSuggestion] = useState(0)
+    const [irraudSell, setIrraudSell] = useState(0)
+    const [irraudAED, setIrraudAED] = useState(0)
+    const [irraudMarket, setIrraudMarket] = useState(0)
 
     //---Competitors
-    const [audirrMax, setAudirrMax] = useState(45100)
-    const [irraudMin, setIraudMin] = useState(46200)
-    const [audirrMoneyMex, setAudirrMoneyMex] = useState(45100)
-    const [irraudMoneyMex, setIrraudMoneyMex] = useState(46200)
-    const [audirrRosecap, setAudirrRosecap] = useState(45100)
-    const [irraudRosecap, setIrraudRosecap] = useState(46200)
-    const [audirrSeyhoon, setAudirrSeyhoon] = useState(45100)
-    const [irraudSeyhoon, setIrraudSeyhoon] = useState(46200)
-    const [audirrJavadi, setAudirrJavadi] = useState(45100)
-    const [irraudJavadi, setIrraudJavadi] = useState(46200)
-    const [audirrExpress, setAudirrExpress] = useState(45100)
-    const [irraudExpress, setIrraudExpress] = useState(46200)
-    const [audirrKangroos, setSudirrKangroos] = useState(45100)
-    const [irraudKangroos, setIrrusdKangroos] = useState(46200)
-    const [audirrRoomi, setAudirrRoomi] = useState(45100)
-    const [irraudRoomi, setIrraudRoomi] = useState(46200)
-    const [audirrAfshar, setAudirrAfshar] = useState(45100)
-    const [irraudAfshar, setIrraudAfshar] = useState(46200)
+    const [audirrMoneyMex, setAudirrMoneyMex] = useState(0)
+    const [irraudMoneyMex, setIrraudMoneyMex] = useState(0)
+    const [audirrRosecap, setAudirrRosecap] = useState(0)
+    const [irraudRosecap, setIrraudRosecap] = useState(0)
+    const [audirrSeyhoon, setAudirrSeyhoon] = useState(0)
+    const [irraudSeyhoon, setIrraudSeyhoon] = useState(0)
+    const [audirrJavadi, setAudirrJavadi] = useState(0)
+    const [irraudJavadi, setIrraudJavadi] = useState(0)
+    const [audirrExpress, setAudirrExpress] = useState(0)
+    const [irraudExpress, setIrraudExpress] = useState(0)
+    const [audirrKangroos, setSudirrKangroos] = useState(0)
+    const [irraudKangroos, setIrrusdKangroos] = useState(0)
+    const [audirrRoomi, setAudirrRoomi] = useState(0)
+    const [irraudRoomi, setIrraudRoomi] = useState(0)
+    const [audirrAfshar, setAudirrAfshar] = useState(0)
+    const [irraudAfshar, setIrraudAfshar] = useState(0)
+
+    const [audirrMax, setAudirrMax] = useState(0)
+    const [irraudMin, setIraudMin] = useState(0)
 
     //---Chart
     const [currencies, setCurrencies] = useState([
@@ -121,16 +140,35 @@ export const Dashboard = () => {
     const trlColor = Color.YELLOW
     const usdColor = Color.RED_LIGHT
     const customColors = [audColor, aedColor, eurColor, trlColor, usdColor]
-
+    
     //------------------------------
     //---Average Days Handler
     //------------------------------
-    const daysHandler = (e) => {
-        setDays(e.target.value)
+    const DaysHandler = (e) => {
+        if (e.key === "Enter") {
+            dispatch(updateDays(days))
+
+            //------------------------------
+            //---Average AUD / IRR Rates
+            //------------------------------
+        }
+    }
+
+    //------------------------------
+    //---Competitor Rates Handler
+    //------------------------------
+    const CompetitorsHandler = (e) => {
+        if (e.key === "Enter") {
+            console.log(audirrMoneyMex)
+        }
     }
 
     //------------------------------
     return (
+        <>
+            <Helmet>
+                <title>NeoEx</title>
+            </Helmet>
         <div>
     {/* ---Title, Balance and Urgent */}
             <RowContainer>
@@ -336,57 +374,74 @@ export const Dashboard = () => {
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
                                 <Title>AUD / IRR</Title>
                                 <Content style={{color: Color.RED_LIGHT, fontSize: "14px"}}>
-                                    {audirrRate.toLocaleString("en-us")}
+                                    {FormatNumber(audirrRate,0)}
                                 </Content>
                                 <Content style={{color: Color.RED_LIGHT, fontSize: "14px"}}>
-                                    {irraudRate.toLocaleString("en-us")}
+                                    {FormatNumber(irraudRate,0)}
                                 </Content>
                             </BoxContent>
-                            <BoxHeader style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
                                 <Title>AUD / AED</Title>
-                                <Content>{aedaudRate.toLocaleString("en-us")}</Content>
-                                <Content>---</Content>
+                                <Content>{FormatNumber(audaedRate)}</Content>
+                                <Content>{FormatNumber(aedaudRate)}</Content>
+                            </BoxContent>
+                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                                <Title>AUD / EUR</Title>
+                                <Content>{FormatNumber(audeurRate)}</Content>
+                                <Content>{FormatNumber(euraudRate)}</Content>
+                            </BoxContent>
+                            <BoxHeader style={{width: "15vw", marginLeft: "1vw"}}>
+                                <Title>AUD / USD</Title>
+                                <Content>{FormatNumber(audusdRate)}</Content>
+                                <Content>{FormatNumber(usdaudRate)}</Content>
                             </BoxHeader>
+
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
                                 <Title>AED / IRR</Title>
-                                <Content>{aedirrRate.toLocaleString("en-us")}</Content>
-                                <Content>{irraedRate.toLocaleString("en-us")}</Content>
+                                <Content>{FormatNumber(aedirrRate,0)}</Content>
+                                <Content>{FormatNumber(irraedRate,0)}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
                                 <Title>EUR / IRR</Title>
-                                <Content>{eurirrRate.toLocaleString("en-us")}</Content>
-                                <Content>{irreurRate.toLocaleString("en-us")}</Content>
+                                <Content>{FormatNumber(eurirrRate,0)}</Content>
+                                <Content>{FormatNumber(irreurRate,0)}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
                                 <Title>TRL / IRR</Title>
-                                <Content>{trlirrRate.toLocaleString("en-us")}</Content>
-                                <Content>{irrtrlRate.toLocaleString("en-us")}</Content>
+                                <Content>{FormatNumber(trlirrRate,0)}</Content>
+                                <Content>{FormatNumber(irrtrlRate,0)}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
                                 <Title>USD / IRR</Title>
-                                <Content>{usdirrRate.toLocaleString("en-us")}</Content>
-                                <Content>{irrusdRate.toLocaleString("en-us")}</Content>
+                                <Content>{FormatNumber(usdirrRate,0)}</Content>
+                                <Content>{FormatNumber(irrusdRate,0)}</Content>
                             </BoxContent>
                         </CustomBox>
         {/* ---Show Average Rates */}
                         <CustomBox>
                             <BoxHeader
                                 style={{
-                                    width: "15vw", marginLeft: "1vw",
+                                    width: "15vw",
+                                    marginLeft: "1vw",
                                     justifyContent: "flex-start"
                                 }}
                             >
                                 <Title>For</Title>
                                 <InputNumber
                                     size = "small"
-                                    defaultValue={days}
-                                    min={1}
-                                    max={365}
+                                    variant="filled"
                                     style = {{
                                         width: "4vw", height: "1.5vw",
                                         marginLeft: "1vw",
                                         fontFamily: "Montserrat", fontWeight: "600",
                                     }}
+                                    min={1}
+                                    max={365}
+                                    value={days}
+                                    onChange={(value)=>{
+                                        setDays(value)
+                                    }}
+                                    onKeyDown={DaysHandler}
                                 />
                                 <Title>days</Title>
                             </BoxHeader>
@@ -394,7 +449,7 @@ export const Dashboard = () => {
                                 <Title>Average AUD / IRR</Title>
                                 <Content>{audirrAverage.toLocaleString("en-us")}</Content>
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginRight: "2vw", marginBottom: "10vw"}}>
+                            <BoxContent style={{width: "15vw", marginRight: "2vw", marginBottom: "15vw"}}>
                                 <Title>Average IRR / AUD</Title>
                                 <Content>{irraudAverage.toLocaleString("en-us")}</Content>
                             </BoxContent>
@@ -408,73 +463,235 @@ export const Dashboard = () => {
                             <BoxName style={{marginTop: "2vw", marginBottom: "1vw"}}>
                                 Competitors
                             </BoxName>
-                            <BoxHeader style={{width: "9vw", marginLeft: "8vw"}}>
+                            <BoxHeader style={{width: "11vw", marginLeft: "7vw"}}>
                                 <YellowLine>
                                     <Header style={{fontSize: "12px"}}>
-                                        AUD/IRR
+                                        AUD / IRR
                                     </Header>
                                 </YellowLine>
                                 <YellowLine>
                                     <Header style={{fontSize: "12px"}}>
-                                        IRR/AUD
+                                        IRR / AUD
                                     </Header>
                                 </YellowLine>
                             </BoxHeader>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     MoneyMex
                                 </Title>
-                                <Content>{audirrMoneyMex.toLocaleString("en-us")}</Content>
-                                <Content>{irraudMoneyMex.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrMoneyMex,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrMoneyMex}
+                                    onChange={(value)=>{
+                                        setAudirrMoneyMex(value)
+                                    }}
+                                    onKeyDown={CompetitorsHandler}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudMoneyMex,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudMoneyMex}
+                                    onChange={(value)=>{
+                                        setIrraudMoneyMex(value)
+                                    }}
+                                    onKeyDown={CompetitorsHandler}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Rosecap
                                 </Title>
-                                <Content>{audirrRosecap.toLocaleString("en-us")}</Content>
-                                <Content>{irraudRosecap.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrRosecap,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrRosecap}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudRosecap,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudRosecap}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Seyhoon
                                 </Title>
-                                <Content>{audirrSeyhoon.toLocaleString("en-us")}</Content>
-                                <Content>{irraudSeyhoon.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrSeyhoon,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrSeyhoon}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudSeyhoon,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudSeyhoon}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Javadi
                                 </Title>
-                                <Content>{audirrJavadi.toLocaleString("en-us")}</Content>
-                                <Content>{irraudJavadi.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrJavadi,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrJavadi}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudJavadi,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudJavadi}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Express
                                 </Title>
-                                <Content>{audirrExpress.toLocaleString("en-us")}</Content>
-                                <Content>{irraudExpress.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrExpress,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrExpress}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudExpress,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudExpress}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Kangroos
                                 </Title>
-                                <Content>{audirrKangroos.toLocaleString("en-us")}</Content>
-                                <Content>{irraudKangroos.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrKangroos,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrKangroos}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudKangroos,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudKangroos}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Roomi
                                 </Title>
-                                <Content>{audirrRoomi.toLocaleString("en-us")}</Content>
-                                <Content>{irraudRoomi.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrRoomi,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrRoomi}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudRoomi,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudRoomi}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
-                            <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
+                            <BoxContent style={{width: "18vw", marginLeft: "1vw", marginBottom: "1vw"}}>
                                 <Title style={{width: "3vw"}}>
                                     Afshar
                                 </Title>
-                                <Content>{audirrAfshar.toLocaleString("en-us")}</Content>
-                                <Content>{irraudAfshar.toLocaleString("en-us")}</Content>
+                                <Input
+                                    placeholder={FormatNumber(audirrAfshar,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={audirrAfshar}
+                                    onChange={e => {
+                                        setAedirrRate(value)
+                                    }}
+                                />
+                                <Input
+                                    placeholder={FormatNumber(irraudAfshar,0)}
+                                    size="small"
+                                    style={{
+                                        width: "5vw",
+                                    }}
+                                    value={irraudAfshar}
+                                    onChange={e => {
+                                        setIrraedRate(value)
+                                    }}
+                                />
                             </BoxContent>
                         </CustomBox>
         {/* ---Show Max Market Rates */}
@@ -498,5 +715,6 @@ export const Dashboard = () => {
                 </CustomBox>
             </RowContainer>
         </div>
+        </>
     )
 }

@@ -6,3 +6,9 @@ interface UserProps {
     access: string
     token: string
   }
+
+//------------------------------Rates Interface
+export interface RateInterface {
+  pair: string  
+  price: number
+}

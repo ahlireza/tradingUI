@@ -1,10 +1,12 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
 
 import ProfileReducer from "./reducers/profile"
+import RatesReducer from "./reducers/rates"
 import RootReducer from "./reducers/root"
 
 const reducer = combineReducers({
   profile: ProfileReducer,
+  rates: RatesReducer,
   root: RootReducer
 })
 

@@ -1,7 +1,7 @@
-import { StrictMode} from "react" 
-import { BrowserRouter }    from "react-router-dom"
-import { createRoot }       from "react-dom/client"
-import { Provider }         from "react-redux" 
+import { BrowserRouter }  from "react-router-dom"
+import { createRoot }     from "react-dom/client"
+import { StrictMode}      from "react"
+import { Provider }       from "react-redux" 
 
 import App from "./App"
 import { store } from "./store"

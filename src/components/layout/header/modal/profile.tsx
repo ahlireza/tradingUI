@@ -198,27 +198,10 @@ export const ProfileModal: React.FC<ModalProps> = ({
             <Input.Password
               placeholder="Old password..."
               size = "large"
+              variant="filled"
               style={{ width: "20vw"}}
             />
-            {/* <InputText
-              style={{ height: "24px", width: "85%" }}
-              label="Old Password"
-              placeholder=""
-              type="password"
-              onChange={(e) => {
-                setOldPassword(e.target.value.trim())
-                setOldPasswordError(false)
-                setOldPasswordHelper("")
-                setPasswordError(false)
-                setPasswordHelper("")
-
-              }}
-              error={oldPasswordError.toString()}
-              helperText={oldPasswordHelper}
-              value={oldPassword}
-            /> */}
           </Box>
-          {/* <Box style={{ width: "100%" }}></Box> */}
         </BoxInput>
 
         <BoxInput style={{ marginTop: "1vw", marginBottom: "2vw"}}>
@@ -227,45 +210,18 @@ export const ProfileModal: React.FC<ModalProps> = ({
               <Input.Password
                 placeholder="New password..."
                 size = "large"
+                variant="filled"
                 style={{ width: "20vw"}}
               />
-        {/* <Box style={{ width: "100%" }}>
-            <InputText
-              style={{ height: "24px", width: "85%" }}
-              label="New Password"
-              placeholder=""
-              type="password"
-              onChange={(e) => {
-                setNewPassword(e.target.value.trim())
-                setPasswordError(false)
-                setPasswordHelper("")
-              }}
-              error={passwordError.toString()}
-              helperText={passwordHelper}
-            /> */}
           </Box>
             <Box style={{ width: "50vw" }}>
               <Label>Confirm Password</Label>
               <Input.Password
                 placeholder="Confirm password..."
                 size = "large"
+                variant="filled"
                 style={{ width: "20vw"}}
               />
-          {/* <Box style={{ width: "100%" }}>
-            <InputText
-              style={{ height: "24px", width: "85%", marginLeft: "7px" }}
-              label="Confirm Password"
-              placeholder=""
-              type="password"
-              onChange={(e) => {
-                setConfirmPassword(e.target.value.trim())
-                setPasswordError(false)
-                setPasswordHelper("")
-              }}
-              error={passwordError.toString()}
-              helperText={passwordHelper}
-              value={confirmPassword}
-            /> */}
           </Box>
         </BoxInput>
 

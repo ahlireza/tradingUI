@@ -90,16 +90,17 @@ export const Login = () => {
                     <Input
                       placeholder={usernameHelper}
                       size="large"
+                      variant="filled"
                       style={{
                         width: "25vw",
                         boxShadow: usernameError ? "0 0 0 1px #780A28" : undefined
                       }}
+                      value={username}
                       onChange={e => {
                         setUsername(e.target.value)
                         setUsernameError(false)
                         setUsernameHelper("Your email...")
                       }}
-                      value={username}
                     />
                   </Box>
 
@@ -107,16 +108,17 @@ export const Login = () => {
                     <Input.Password
                       placeholder={passHelper}
                       size="large"
+                      variant="filled"
                       style={{
                         width: "25vw",
                         boxShadow: passError ? "0 0 0 1px #780A28" : undefined
                       }}
+                      value={pass}
                       onChange={event => {
                         setPass(event.target.value);
                         setPassError(false)
                         setPassHelper("Passwoed...")
                       }}
-                      value={pass}
                     />
                   </Box>
 
