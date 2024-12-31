@@ -25,23 +25,6 @@ const initialState = {
     irrtrlRate: 170000,
     usdirrRate: 710000,
     irrusdRate: 720000
-
-        // {paid: "audirrMoneyMex", price: 0},
-        // {paid: "irraudMoneyMex", price: 0},
-        // {paid: "audirrRosecap", price: 0},
-        // {paid: "irraudRosecap", price: 0},
-        // {paid: "audirrSeyhoon", price: 0},
-        // {paid: "irraudSeyhoon", price: 0},
-        // {paid: "audirrJavadi", price: 0},
-        // {paid: "irraudJavadi", price: 0},
-        // {paid: "audirrExpress", price: 0},
-        // {paid: "irraudExpress", price: 0},
-        // {paid: "audirrKangroos", price: 0},
-        // {paid: "irraudKangroos", price: 0},
-        // {paid: "audirrRoomi", price: 0},
-        // {paid: "irraudRoomi", price: 0},
-        // {paid: "audirrAfshar", price: 0},
-        // {paid: "irraudAfshar", price: 0}
 }
 
 //------------------------------

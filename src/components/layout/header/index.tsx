@@ -4,7 +4,6 @@ import Cookies      from "js-cookie"
 
 import { ProfileCircle }  from "iconsax-react"
 import { Notification }   from "iconsax-react"
-import { Home }           from "iconsax-react"
 
 import { ProfileModal }     from "./modal/profile"
 
@@ -61,7 +60,7 @@ export const Header = () => {
     //------------------------------
     return (
         <div>
-            <HeaderContainer style={{backgroundColor: Color.BLUE_DARK}}>
+            <HeaderContainer>
               <BoxHeader>
                 <div>
                   <BoxLogo>
@@ -69,19 +68,14 @@ export const Header = () => {
                       <IconViewer
                         src={logo}
                         alt={"LogoImage"}
-                        style={{ width: "8vw", height: "2.5vw" }}
+                        style={{ width: "120px", height: "30px", display: "flex" }}
                       />
                     </Link>
                   </BoxLogo>
                 </div>
               </BoxHeader>
 
-              <BoxHeader style={{width: "60vw", marginLeft: "1vw"}}>
-                <BoxProfile>
-                  <Link to = "/">
-                    <Home size="20" color={Color.WHITE}/>
-                  </Link>
-                </BoxProfile>
+              <BoxHeader style={{width: "60%", marginLeft: "1vw"}}>
               <ItemLink
                   style={{marginRight: "1vw"}}
                   to={"/new-order"}

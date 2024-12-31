@@ -6,7 +6,8 @@ import { CustomBox }    from "src/components/core/CustomBox"
 
 //------------------------------
 export const BoxHeader = styled(CustomBox)`
-  width: 99vw;
+  width: 100vw;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +15,7 @@ export const BoxHeader = styled(CustomBox)`
 `;
 
 export const BoxTitle = styled(CustomBox)`
-  width: 12vw;
+  width: 200px;
   background: #F5F5F5;
   display: flex;
   justify-content: flex-start;

@@ -11,18 +11,26 @@ export const RowContainer = styled(CustomBox)`
   align-items: left;
 `;
 
+export const BoxTop = styled(CustomBox)`
+  width: 100vw;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const BoxTitle = styled(CustomBox)`
-  width: 12vw;
+  width: 200px;
   background: #F5F5F5;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center;  
 `;
 
 export const BoxSide = styled(CustomBox)`
   height: 50px;
   border: 3px solid #966432;
-  margin-right: 10px;
+  margin-right: 1vw;
 `;
 
 export const BoxContainer = styled(CustomBox)`

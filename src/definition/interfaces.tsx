@@ -9,6 +9,5 @@ interface UserProps {
 
 //------------------------------Rates Interface
 export interface RateInterface {
-  pair: string  
   price: number
 }

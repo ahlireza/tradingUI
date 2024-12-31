@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Scanning } from "iconsax-react"
 import { Helmet }   from "react-helmet"
 
-import { InputNumber }    from "antd"
+import { Input, InputNumber }    from "antd"
 
-import { FormatNumber } from "src/components/common/format"
 import { CustomBox }    from "src/components/core/CustomBox"
 import { PieChart }     from "src/components/core/chart/PieChart"
-import { Benefit }      from "src/definition/domain"
 import { Color }        from "src/definition/color"
+import { FormatNumber } from "src/components/common/format"
 
 import { AppDispatch, RootState }   from "@/store"
 import { updateDays }               from "src/store/actions/rates"
@@ -25,16 +24,15 @@ import {
 } from "src/store/actions/competitors"
 
 import {
-    RowContainer,
-    BoxTop,
     BoxTitle,
     BoxSide,
+    Name,
+    RowContainer,
     BoxContainer,
-    BoxName,
     BoxHeader,
     YellowLine,
     BoxContent,
-    Name,
+    BoxName,
     Header,
     Title,
     Content,
@@ -109,15 +107,14 @@ export const Dashboard = () => {
     const [irraudAverage, setIrraudAverage] = useState(0)
 
     //---Suggestion
+    const [audirrSuggestion, setAudirrSuggestion] = useState(0)
     const [audirrSell, setAudirrSell] = useState(0)
     const [audirrAED, setAudirrAED] = useState(0)
     const [audirrMarket, setAudirrMarket] = useState(0)
+    const [irraudSuggestion, setIrraudSuggestion] = useState(0)
     const [irraudSell, setIrraudSell] = useState(0)
     const [irraudAED, setIrraudAED] = useState(0)
     const [irraudMarket, setIrraudMarket] = useState(0)
-
-    const [audirrSuggestion, setAudirrSuggestion] = useState(0)
-    const [irraudSuggestion, setIrraudSuggestion] = useState(0)
 
     //---Competitors
     const [audirrMoneyMex, setAudirrMoneyMex] = useState(competitor.audirrMoneyMex)
@@ -138,7 +135,7 @@ export const Dashboard = () => {
     const [irraudAfshar, setIrraudAfshar] = useState(competitor.irraudAfshar)
 
     const [audirrMax, setAudirrMax] = useState(0)
-    const [irraudMin, setIrraudMin] = useState(0)
+    const [irraudMin, setIraudMin] = useState(0)
 
     //---Chart
     const [currencies, setCurrencies] = useState([
@@ -196,48 +193,6 @@ export const Dashboard = () => {
     const AfsharirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudAfshar(irraudAfshar))}}
 
     //------------------------------
-    //---Suggestions Rates
-    //------------------------------
-    useEffect(() => {
-        setAudirrMarket(audirrMax + Benefit.Market)
-        setIrraudMarket(irraudMin - Benefit.Market)
-    }, [audirrMax, irraudMin])
-
-    useEffect(() => {
-        setAudirrSell((irraudRate * (1 - Benefit.AUDIRR)))
-        setIrraudSell((audirrRate * (1 + Benefit.IRRAUD)))
-    }, [audirrRate, irraudRate])
-
-    useEffect(() => {
-        setAudirrAED(audaedRate * irraedRate)
-        setIrraudAED(aedaudRate * aedirrRate)
-    }, [aedaudRate, audaedRate, aedirrRate, irraedRate])
-
-
-    useEffect(() => {
-        setAudirrSuggestion((Math.round(Math.min(audirrSell, audirrMarket)/1000)*1000))
-        setIrraudSuggestion((Math.round(Math.max(irraudSell, irraudMarket)/1000)*1000))
-    }, [audirrSell, irraudSell, audirrMarket, irraudMarket])
-
-    //------------------------------
-    //---Competitors Max and Min Rates
-    //------------------------------
-    const MaxCompetitors = () => {
-        return Math.max(audirrMoneyMex, audirrRosecap, audirrSeyhoon, audirrJavadi, audirrExpress, audirrKangroos, audirrRoomi, audirrAfshar)
-    }
-
-    const MinCompetitors = () => {
-        return Math.min(irraudMoneyMex, irraudRosecap, irraudSeyhoon, irraudJavadi, irraudExpress, irraudKangroos, irraudRoomi, irraudAfshar)
-    }
-
-    useEffect(() => {
-        setAudirrMax(MaxCompetitors())
-    }, [audirrMoneyMex, audirrRosecap, audirrSeyhoon, audirrJavadi, audirrExpress, audirrKangroos, audirrRoomi, audirrAfshar])
-    useEffect(() => {
-        setIrraudMin(MinCompetitors())
-    }, [irraudMoneyMex, irraudRosecap, irraudSeyhoon, irraudJavadi, irraudExpress, irraudKangroos, irraudRoomi, irraudAfshar])
-
-    //------------------------------
     return (
         <>
             <Helmet>
@@ -245,7 +200,7 @@ export const Dashboard = () => {
             </Helmet>
         <div>
     {/* ---Title, Balance and Urgent */}
-            <BoxTop>
+            <RowContainer>
                 <BoxTitle>
                     <BoxSide/>
                     <Scanning
@@ -257,21 +212,23 @@ export const Dashboard = () => {
                 <BoxContent style={{width: "40vw", marginTop: "10px",   justifyContent: "flex-start"}}>
                     <BoxName>
                         AUD Payment Balance: 
+                        {/* ${audReceiveBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})} */}
                     </BoxName>
                     <BoxName style={{ color: Color.RED}}>
-                        ${FormatNumber(audReceiveBalance,2)}
+                        ${audReceiveBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                     </BoxName>
                 </BoxContent>
-                <BoxContent style={{width: "40vw", marginTop: "10px",   justifyContent: "flex-start"}}>
+                    <BoxContent style={{width: "40vw", marginTop: "10px",   justifyContent: "flex-start"}}>
                     <BoxName>
                         IRR Payment Balance:
+                        {irrReceiveBalance.toLocaleString("en-us")}
                     </BoxName>
                     <BoxName style={{ color: Color.RED}}>
-                        {FormatNumber(irrReceiveBalance,0)}
+                        {irrReceiveBalance.toLocaleString("en-us")}
                     </BoxName>
                 </BoxContent>
-            </BoxTop>
-            <BoxTop>
+            </RowContainer>
+            <RowContainer>
                 <BoxContent
                     style = {{
                         width: "40vw",
@@ -279,7 +236,7 @@ export const Dashboard = () => {
                         marginBottom: "1vw"
                     }}>
                     <BoxName style={{ color: Color.RED_LIGHT }}>
-                        Urgent: ${FormatNumber(audUrgentBalance,2)}
+                        Urgent: ${audUrgentBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                     </BoxName>
                 </BoxContent>
                 <BoxContent
@@ -289,16 +246,16 @@ export const Dashboard = () => {
                         marginBottom: "1vw"
                     }}>
                     <BoxName style={{ color: Color.RED_LIGHT }}>
-                        Urgent: {FormatNumber(irrUrgentBalance,0)}
+                        Urgent: {irrUrgentBalance.toLocaleString("en-us")}
                     </BoxName>
                 </BoxContent>
-            </BoxTop>
+            </RowContainer>
             <BoxContainer style={{marginLeft: "1vw"}}/>
     {/* ---Body */}
             <RowContainer>
                 <CustomBox>
     {/* ---Assets */}
-                   <BoxContainer style={{width: "60vw", marginLeft: "1vw"}}>
+                    <BoxContainer style={{width: "60vw", marginLeft: "1vw"}}>
         {/* ---Show Equal Balance */}
                         <CustomBox>
                             <BoxHeader style={{width: "10vw", marginLeft: "1vw"}}>
@@ -310,11 +267,11 @@ export const Dashboard = () => {
                                 <CustomBox>
                                     <Title>Equal AUD Balance</Title>
                                     <Content style={{marginLeft: "2vw", fontSize: "14px", color: Color.RED}}>
-                                        {FormatNumber(equalAUDBalance,2)}
+                                        {equalAUDBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                     </Content>
                                     <Title style={{marginTop: "2vw"}}>AED Available</Title>
                                     <Content style={{marginLeft: "2vw", fontSize: "14px", color: Color.RED}}>
-                                        {FormatNumber(availableAED,2)}
+                                        {availableAED.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                     </Content>
                                 </CustomBox>
                             </BoxContent>
@@ -336,7 +293,7 @@ export const Dashboard = () => {
                                     AUD
                                 </Title>
                                 <Content>
-                                    {FormatNumber(audBalance,2)}
+                                    {audBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
@@ -345,7 +302,7 @@ export const Dashboard = () => {
                                     AED
                                 </Title>
                                 <Content>
-                                    {FormatNumber(aedBalance,2)}
+                                    {aedBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
@@ -354,7 +311,7 @@ export const Dashboard = () => {
                                     EUR
                                 </Title>
                                 <Content>
-                                    {FormatNumber(eurBalance,2)}
+                                    {eurBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
@@ -363,7 +320,7 @@ export const Dashboard = () => {
                                     TRL
                                 </Title>
                                 <Content>
-                                    {FormatNumber(trlBalance,2)}
+                                    {trlBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                 </Content>
                             </BoxContent>
                             <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start", marginBottom: "1vw"}}>
@@ -372,12 +329,12 @@ export const Dashboard = () => {
                                     USD
                                 </Title>
                                 <Content>
-                                    {FormatNumber(usdBalance,2)}
+                                    {usdBalance.toLocaleString("en-us", {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                                 </Content>
                             </BoxContent>
                         </CustomBox>
                     </BoxContainer>
-
+                
     {/* ---Rate Suggestion */}
                     <BoxContainer style={{width: "60vw", marginLeft: "1vw"}}>
         {/* ---AUD / IRR Rate Suggestion */}
@@ -390,20 +347,20 @@ export const Dashboard = () => {
                                     <Header>AUD / IRR</Header>
                                 </YellowLine>
                                 <Header style={{color: Color.RED}}>
-                                    {FormatNumber(audirrSuggestion,0)}
+                                    {audirrSuggestion.toLocaleString("en-us")}
                                 </Header>
                                 </BoxHeader>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
-                                <Title>Based on Market</Title>
-                                <Content>{FormatNumber(audirrMarket,0)}</Content>
+                                <Title>Based on Sell</Title>
+                                <Content>{audirrSell.toLocaleString("en-us")}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
-                                <Title>Based on Sell</Title>
-                                <Content>{FormatNumber(audirrSell,0)}</Content>
+                                <Title>Based on AED</Title>
+                                <Content>{audirrAED.toLocaleString("en-us")}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
-                                <Title>Based on AED</Title>
-                                <Content>{FormatNumber(audirrAED,0)}</Content>
+                                <Title>Based on Market</Title>
+                                <Content>{audirrMarket.toLocaleString("en-us")}</Content>
                             </BoxContent>
                         </CustomBox>
         {/* ---IRR / AUD Rate Suggestion */}
@@ -414,20 +371,20 @@ export const Dashboard = () => {
                                     <Header>IRR/ AUD</Header>
                                 </YellowLine>
                                 <Header style={{color: Color.RED}}>
-                                    {FormatNumber(irraudSuggestion,0)}
+                                    {irraudSuggestion.toLocaleString("en-us")}
                                 </Header>
                             </BoxHeader>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
-                                <Title>Based on Market</Title>
-                                <Content>{FormatNumber(irraudMarket,0)}</Content>
+                                <Title>Based on Sell</Title>
+                                <Content>{irraudSell.toLocaleString("en-us")}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
-                                <Title>Based on Sell</Title>
-                                <Content>{FormatNumber(irraudSell,0)}</Content>
+                                <Title>Based on AED</Title>
+                                <Content>{irraudAED}</Content>
                             </BoxContent>
                             <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
-                                <Title>Based on AED</Title>
-                                <Content>{FormatNumber(irraudAED,0)}</Content>
+                                <Title>Based on Market</Title>
+                                <Content>{irraudMarket.toLocaleString("en-us")}</Content>
                             </BoxContent>
                         </CustomBox>
                     </BoxContainer>
@@ -820,7 +777,7 @@ export const Dashboard = () => {
                     </BoxContainer>
                 </CustomBox>
             </RowContainer>
-            </div>
+        </div>
         </>
     )
 }

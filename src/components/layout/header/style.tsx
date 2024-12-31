@@ -6,9 +6,12 @@ import { CustomBox }    from "src/components/core/CustomBox"
 
 //------------------------------
 export const HeaderContainer = styled.header`
-    width: 99vw;
-    height: 5vw;
+    width: 100vw;
+    height: 70px;
     border-radius: 0;
+    box-sizing: border-box;
+    background-color: #000A23;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     position: fixed;
     top: 0;
     right: 0;
@@ -19,26 +22,16 @@ export const HeaderContainer = styled.header`
     z-index:10;
 `;
 
-// export const BoxHeaderStart = styled(CustomBox)`
-//     margin:0 0;
-// `;
-
-// export const BoxHeader = styled(CustomBox)`
-//     width: 60vw;
-//     margin:0 2vw;
-// `;
-
 export const BoxHeader = styled(CustomBox)`
     display: flex;
     align-items: center;
-    // justify-content: space-between;
 `;
 
 export const BoxLogo = styled(CustomBox)`
   display: flex;
   align-items: center;
-  width: 100%;
-  margin: 0 0 0 2vw;
+  width: auto;
+  margin-left: 2vw;
 `;
 
 export const ItemLink = styled(Link) <{ active: boolean }>`
@@ -46,13 +39,13 @@ export const ItemLink = styled(Link) <{ active: boolean }>`
     color: ${({ active }) => (active ? "#FFFF00" : "#FFFFFF")};
     font-size: 14px;
     font-style: normal;
-    margin: 0 0 0 1vw;
+    margin-left: 1vw;
     font-family: Montserrat;
     font-weight:${({ active }) => (active ? "700" : "500")};
 `;
 
 export const BoxProfile = styled(CustomBox)`
-    margin: 0 0 0 1vw;
+    margin-left: 1vw;
     display: flex;
     align-items: center;
 `;
@@ -61,7 +54,7 @@ export const HR = styled.div`
     width: 1px;
     height: 20px;
     background: #FFFFFF;
-    margin:0 0 0 1vw;
+    margin-left: 1vw;
 `;
 
 export const TextProfile = styled(Typography)`

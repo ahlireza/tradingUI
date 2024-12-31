@@ -82,7 +82,7 @@ export const PageHeader = ({
         <BoxHeader>
             <BoxTitle>
                 <BoxSide/>
-                {Icon && <Icon size="20" color="#808080" aria-hidden="true" />}                
+                {Icon && <Icon size="20px" color="#808080" aria-hidden="true" />}               
                 <Name>{name}</Name>
             </BoxTitle>
             <BoxMenu>
