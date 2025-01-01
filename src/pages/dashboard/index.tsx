@@ -126,7 +126,7 @@ export const Dashboard = () => {
 
     //---Suggestion
     const [audirrSell, setAudirrSell] = useState(rate.suggestionRates.audirrSell)
-    const [irraudSell, setIrraudSell] = useState(rate.suggestionRates.irraudSell)
+    const [irraudBuy, setIrraudBuy] = useState(rate.suggestionRates.irraudBuy)
     const [audirrAED, setAudirrAED] = useState(rate.suggestionRates.audirrAED)
     const [irraudAED, setIrraudAED] = useState(rate.suggestionRates.irraudAED)
     const [audirrMarket, setAudirrMarket] = useState(rate.suggestionRates.audirrMarket)
@@ -212,46 +212,6 @@ export const Dashboard = () => {
     const AfsharirraudHandler = (e) => {dispatch(updateirraudAfshar(irraudAfshar))}
 
     //------------------------------
-    //---Suggestions Rates
-    //------------------------------
-    useEffect(() => {
-        setAudirrMarket(audirrMax <= 0 ? 0 : (audirrMax + Benefit.Market))
-        setIrraudMarket(irraudMin <= 0 ? 0 : irraudMin)
-
-        dispatch(updateaudirrMarket(audirrMarket))
-        dispatch(updateirraudMarket(irraudMarket))
-    }, [audirrMax, irraudMin])
-
-    useEffect(() => {
-        setAudirrSell((irraudRate * (1 - Benefit.AUDIRR)))
-        setIrraudSell((audirrRate * (1 + Benefit.IRRAUD)))
-
-        dispatch(updateaudirrSell(audirrSell))
-        dispatch(updateirraudSell(irraudSell))
-    }, [audirrRate, irraudRate])
-
-    useEffect(() => {
-        setAudirrAED(audaedRate * irraedRate)
-        setIrraudAED(aedaudRate * aedirrRate)
-
-        dispatch(updateaudirrAED(audirrAED))
-        dispatch(updateirraudAED(irraudAED))
-    }, [aedaudRate, audaedRate, aedirrRate, irraedRate])
-
-
-    useEffect(() => {
-        const audirrList = [audirrMarket, audirrSell, audirrAED]
-        const nonZeroList = audirrList.filter(audirr => audirr > 0)
-        const audirrSuggestion = nonZeroList.length > 0 ? Math.min(...nonZeroList) : 0
-        setAudirrSuggestion((Math.round(audirrSuggestion/1000)*1000))
-
-        setIrraudSuggestion((Math.round(Math.max(irraudMarket, irraudSell, irraudAED)/1000)*1000))
-
-        dispatch(updateaudirrSuggestion(audirrSuggestion))
-        dispatch(updateirraudSuggestion(irraudSuggestion))
-    }, [audirrSell, irraudSell, audirrMarket, irraudMarket, audirrAED, irraudAED])
-
-    //------------------------------
     //---Competitors Max and Min Rates
     //------------------------------
     const MaxCompetitors = () => {
@@ -271,6 +231,46 @@ export const Dashboard = () => {
     useEffect(() => {
         setIrraudMin(MinCompetitors())
     }, [irraudMoneyMex, irraudRosecap, irraudSeyhoon, irraudJavadi, irraudExpress, irraudKangroos, irraudRoomi, irraudAfshar])
+
+    //------------------------------
+    //---Suggestions Rates
+    //------------------------------
+    useEffect(() => {
+        setAudirrMarket(audirrMax <= 0 ? 0 : (audirrMax + Benefit.Market))
+        setIrraudMarket(irraudMin <= 0 ? 0 : irraudMin)
+
+        dispatch(updateaudirrMarket(audirrMarket))
+        dispatch(updateirraudMarket(irraudMarket))
+    }, [audirrMax, irraudMin])
+
+    useEffect(() => {
+        setAudirrSell((irraudRate * (1 - Benefit.AUDIRR)))
+        setIrraudBuy((audirrRate * (1 + Benefit.IRRAUD)))
+
+        dispatch(updateaudirrSell(audirrSell))
+        dispatch(updateirraudSell(irraudBuy))
+    }, [audirrRate, irraudRate])
+
+    useEffect(() => {
+        setAudirrAED(audaedRate * irraedRate)
+        setIrraudAED(aedaudRate * aedirrRate)
+
+        dispatch(updateaudirrAED(audirrAED))
+        dispatch(updateirraudAED(irraudAED))
+    }, [aedaudRate, audaedRate, aedirrRate, irraedRate])
+
+
+    useEffect(() => {
+        const audirrList = [audirrMarket, audirrSell, audirrAED]
+        const nonZeroList = audirrList.filter(audirr => audirr > 0)
+        const audirrSuggestion = nonZeroList.length > 0 ? Math.min(...nonZeroList) : 0
+        setAudirrSuggestion((Math.round(audirrSuggestion/1000)*1000))
+
+        setIrraudSuggestion((Math.round(Math.max(irraudMarket, irraudBuy, irraudAED)/1000)*1000))
+
+        dispatch(updateaudirrSuggestion(audirrSuggestion))
+        dispatch(updateirraudSuggestion(irraudSuggestion))
+    }, [audirrSell, irraudBuy, audirrMarket, irraudMarket, audirrAED, irraudAED])
 
     //------------------------------
     return (
@@ -467,7 +467,7 @@ export const Dashboard = () => {
                                 </BoxContent>
                                 <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
                                     <Title>Based on Buy</Title>
-                                    <Content>{FormatNumber(irraudSell,0)}</Content>
+                                    <Content>{FormatNumber(irraudBuy,0)}</Content>
                                 </BoxContent>
                                 <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
                                     <Title>Based on AED</Title>

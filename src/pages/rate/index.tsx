@@ -79,12 +79,6 @@ export const Rate = () => {
     const [irrusdRate, setIrrusdRate] = useState(rate.irrRates.irrusdRate)
 
     //---Suggestion
-    const [audirrSell, setAudirrSell] = useState(rate.suggestionRates.audirrSell)
-    const [irraudSell, setIrraudSell] = useState(rate.suggestionRates.irraudSell)
-    const [audirrAED, setAudirrAED] = useState(rate.suggestionRates.audirrAED)
-    const [irraudAED, setIrraudAED] = useState(rate.suggestionRates.irraudAED)
-    const [audirrMarket, setAudirrMarket] = useState(rate.suggestionRates.audirrMarket)
-    const [irraudMarket, setIrraudMarket] = useState(rate.suggestionRates.irraudMarket)
     const [audirrSuggestion, setAudirrSuggestion] = useState(rate.suggestionRates.audirrSuggestion)
     const [irraudSuggestion, setIrraudSuggestion] = useState(rate.suggestionRates.irraudSuggestion)
 
@@ -118,7 +112,7 @@ export const Rate = () => {
     return (
         <>
             <Helmet>
-                <title>NeoEx-Rate</title>
+                <title>Rate</title>
             </Helmet>
             <div>
                 <RateHeader />

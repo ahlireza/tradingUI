@@ -36,7 +36,7 @@ const initialState = {
 
     suggestionRates:{
         audirrSell: 0,
-        irraudSell: 0,
+        irraudBuy: 0,
         audirrAED: 0,
         irraudAED: 0,
         audirrMarket: 0,
