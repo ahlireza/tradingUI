@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState }      from "react"
+import { useState } from "react"
 import { Helmet }   from "react-helmet"
 
 import { InputNumber }    from "antd"
@@ -16,6 +16,8 @@ import {
 
     updateaudaedRate,
     updateaedaudRate,
+    updateaudcadRate,
+    updatecadaudRate,
     updateaudeurRate,
     updateeuraudRate,
     updateaudusdRate,
@@ -23,6 +25,8 @@ import {
 
     updateaedirrRate,
     updateirraedRate,
+    updatecadirrRate,
+    updateirrcadRate,
     updateeurirrRate,
     updateirreurRate,
     updatetrlirrRate,
@@ -41,7 +45,6 @@ import {
     Title,
     Content
 } from "../style"
-import { Box } from "iconsax-react"
 
 //------------------------------
 //---Rate
@@ -52,59 +55,64 @@ export const Rate = () => {
     const rate = useSelector((state: RootState) => state.rates)
 
     //---Rate
-    const [audirrRate, setAudirrRate] = useState(rate.audirrRate)
-    const [irraudRate, setIrraudRate] = useState(rate.irraudRate)
+    const [audirrRate, setAudirrRate] = useState(rate.audRates.audirrRate)
+    const [irraudRate, setIrraudRate] = useState(rate.audRates.irraudRate)
 
-    const [audaedRate, setAudaedRate] = useState(rate.audaedRate)
-    const [aedaudRate, setAedaudRate] = useState(rate.aedaudRate)
-    const [audeurRate, setAudeurRate] = useState(rate.audeurRate)
-    const [euraudRate, setEuraudRate] = useState(rate.euraudRate)
-    const [audusdRate, setAudusdRate] = useState(rate.audusdRate)
-    const [usdaudRate, setUsdaudRate] = useState(rate.usdaudRate)
+    const [audaedRate, setAudaedRate] = useState(rate.audRates.audaedRate)
+    const [aedaudRate, setAedaudRate] = useState(rate.audRates.aedaudRate)
+    const [audcadRate, setAudcadRate] = useState(rate.audRates.audcadRate)
+    const [cadaudRate, setCadaudRate] = useState(rate.audRates.cadaudRate)
+    const [audeurRate, setAudeurRate] = useState(rate.audRates.audeurRate)
+    const [euraudRate, setEuraudRate] = useState(rate.audRates.euraudRate)
+    const [audusdRate, setAudusdRate] = useState(rate.audRates.audusdRate)
+    const [usdaudRate, setUsdaudRate] = useState(rate.audRates.usdaudRate)
 
-    const [aedirrRate, setAedirrRate] = useState(rate.aedirrRate)
-    const [irraedRate, setIrraedRate] = useState(rate.irraedRate)
-    const [eurirrRate, setEurirrRate] = useState(rate.eurirrRate)
-    const [irreurRate, setIrreurRate] = useState(rate.irreurRate)
-    const [trlirrRate, setTrlirrRate] = useState(rate.trlirrRate)
-    const [irrtrlRate, setIrrtrlRate] = useState(rate.irrtrlRate)
-    const [usdirrRate, setUsdirrRate] = useState(rate.usdirrRate)
-    const [irrusdRate, setIrrusdRate] = useState(rate.irrusdRate)
+    const [aedirrRate, setAedirrRate] = useState(rate.irrRates.aedirrRate)
+    const [irraedRate, setIrraedRate] = useState(rate.irrRates.irraedRate)
+    const [cadirrRate, setCadirrRate] = useState(rate.irrRates.cadirrRate)
+    const [irrcadRate, setIrrcadRate] = useState(rate.irrRates.irrcadRate)
+    const [eurirrRate, setEurirrRate] = useState(rate.irrRates.eurirrRate)
+    const [irreurRate, setIrreurRate] = useState(rate.irrRates.irreurRate)
+    const [trlirrRate, setTrlirrRate] = useState(rate.irrRates.trlirrRate)
+    const [irrtrlRate, setIrrtrlRate] = useState(rate.irrRates.irrtrlRate)
+    const [usdirrRate, setUsdirrRate] = useState(rate.irrRates.usdirrRate)
+    const [irrusdRate, setIrrusdRate] = useState(rate.irrRates.irrusdRate)
 
     //---Suggestion
-    const [audirrSell, setAudirrSell] = useState(rate.audirrSell)
-    const [irraudSell, setIrraudSell] = useState(rate.irraudSell)
-
-    const [audirrAED, setAudirrAED] = useState(rate.audirrAED)
-    const [irraudAED, setIrraudAED] = useState(rate.irraudAED)
-
-    const [audirrMarket, setAudirrMarket] = useState(rate.audirrMarket)
-    const [irraudMarket, setIrraudMarket] = useState(rate.irraudMarket)
-
-    const [audirrSuggestion, setAudirrSuggestion] = useState(rate.audirrSuggestion)
-    const [irraudSuggestion, setIrraudSuggestion] = useState(rate.irraudSuggestion)
+    const [audirrSell, setAudirrSell] = useState(rate.suggestionRates.audirrSell)
+    const [irraudSell, setIrraudSell] = useState(rate.suggestionRates.irraudSell)
+    const [audirrAED, setAudirrAED] = useState(rate.suggestionRates.audirrAED)
+    const [irraudAED, setIrraudAED] = useState(rate.suggestionRates.irraudAED)
+    const [audirrMarket, setAudirrMarket] = useState(rate.suggestionRates.audirrMarket)
+    const [irraudMarket, setIrraudMarket] = useState(rate.suggestionRates.irraudMarket)
+    const [audirrSuggestion, setAudirrSuggestion] = useState(rate.suggestionRates.audirrSuggestion)
+    const [irraudSuggestion, setIrraudSuggestion] = useState(rate.suggestionRates.irraudSuggestion)
 
     //------------------------------
     //---Rates Handler
     //------------------------------
-    const audirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrRate(audirrRate))}}
-    const irraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudRate(irraudRate))}}
+    const audirrHandler = (e) => {dispatch(updateaudirrRate(audirrRate))}
+    const irraudHandler = (e) => {dispatch(updateirraudRate(irraudRate))}
 
-    const audaedHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudaedRate(audaedRate))}}
-    const aedaudHandler = (e) => {if (e.key === "Enter") {dispatch(updateaedaudRate(aedaudRate))}}
-    const audeurHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudeurRate(audeurRate))}}
-    const euraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateeuraudRate(euraudRate))}}
-    const audusdHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudusdRate(audusdRate))}}
-    const usdaudHandler = (e) => {if (e.key === "Enter") {dispatch(updateusdaudRate(usdaudRate))}}
+    const audaedHandler = (e) => {dispatch(updateaudaedRate(audaedRate))}
+    const aedaudHandler = (e) => {dispatch(updateaedaudRate(aedaudRate))}
+    const audcadHandler = (e) => {dispatch(updateaudcadRate(audcadRate))}
+    const cadaudHandler = (e) => {dispatch(updatecadaudRate(cadaudRate))}
+    const audeurHandler = (e) => {dispatch(updateaudeurRate(audeurRate))}
+    const euraudHandler = (e) => {dispatch(updateeuraudRate(euraudRate))}
+    const audusdHandler = (e) => {dispatch(updateaudusdRate(audusdRate))}
+    const usdaudHandler = (e) => {dispatch(updateusdaudRate(usdaudRate))}
 
-    const aedirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaedirrRate(aedirrRate))}}
-    const irraedHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraedRate(irraedRate))}}
-    const eurirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateeurirrRate(eurirrRate))}}
-    const irreurHandler = (e) => {if (e.key === "Enter") {dispatch(updateirreurRate(irreurRate))}}
-    const trlirrHandler = (e) => {if (e.key === "Enter") {dispatch(updatetrlirrRate(trlirrRate))}}
-    const irrtrlHandler = (e) => {if (e.key === "Enter") {dispatch(updateirrtrlRate(irrtrlRate))}}
-    const usdirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateusdirrRate(usdirrRate))}}
-    const irrusdHandler = (e) => {if (e.key === "Enter") {dispatch(updateirrusdRate(irrusdRate))}}
+    const aedirrHandler = (e) => {dispatch(updateaedirrRate(aedirrRate))}
+    const irraedHandler = (e) => {dispatch(updateirraedRate(irraedRate))}
+    const cadirrHandler = (e) => {dispatch(updatecadirrRate(cadirrRate))}
+    const irrcadHandler = (e) => {dispatch(updateirrcadRate(irrcadRate))}
+    const eurirrHandler = (e) => {dispatch(updateeurirrRate(eurirrRate))}
+    const irreurHandler = (e) => {dispatch(updateirreurRate(irreurRate))}
+    const trlirrHandler = (e) => {dispatch(updatetrlirrRate(trlirrRate))}
+    const irrtrlHandler = (e) => {dispatch(updateirrtrlRate(irrtrlRate))}
+    const usdirrHandler = (e) => {dispatch(updateusdirrRate(usdirrRate))}
+    const irrusdHandler = (e) => {dispatch(updateirrusdRate(irrusdRate))}
     
     //------------------------------
     return (
@@ -118,7 +126,7 @@ export const Rate = () => {
                 <RowContainer>
                     <CustomBox>
         {/* ---AUD IRR Rate */}
-                        <BoxContainer style={{width: "60vw", marginLeft: "1vw"}}>
+                        <BoxContainer style={{width: "65vw"}}>
                             <CustomBox>
                                 <BoxHeader style={{width: "40vw", marginLeft: "1vw", marginTop: "1vw"}}>
                                     <YellowLine>
@@ -159,20 +167,303 @@ export const Rate = () => {
                                 </BoxContent>
                                 <BoxContent style={{width: "35vw", marginLeft: "1vw", marginBottom: "1vw"}}>
                                     <BoxContent style={{width: "10vw"}}>
-                                        <Title style={{width: "5vw"}}>
+                                        <Title style={{width: "5vw", color: "#000080"}}>
                                             Suggestion
                                         </Title>
-                                        <Content>
+                                        <Content style={{color: "#000080"}}>
                                             {FormatNumber(audirrSuggestion,0)}
                                         </Content>
                                     </BoxContent>
                                     <BoxContent style={{width: "10vw"}}>
-                                        <Title style={{width: "5vw"}}>
+                                        <Title style={{width: "5vw", color: "#000080"}}>
                                             Suggestion
                                         </Title>
-                                        <Content>
+                                        <Content style={{color: "#000080"}}>
                                             {FormatNumber(irraudSuggestion,0)}
                                         </Content>
+                                    </BoxContent>
+                                </BoxContent>
+                            </CustomBox>
+                        </BoxContainer>
+                    </CustomBox>
+                    <CustomBox>
+        {/* ---AUD Rates */}
+                        <BoxContainer style={{width: "32vw"}}>
+                            <CustomBox>
+                                <BoxHeader style={{width: "25vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <YellowLine>
+                                        <Header>AUD Rates</Header>
+                                    </YellowLine>
+                                </BoxHeader>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            AUD / AED
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(audaedRate)}
+                                            onChange={(value)=>{
+                                                setAudaedRate(value)
+                                            }}
+                                            onKeyDown={audaedHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(aedaudRate)}
+                                            onChange={(value)=>{
+                                                setAedaudRate(value)
+                                            }}
+                                            onKeyDown={aedaudHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            AUD / CAD
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(audcadRate)}
+                                            onChange={(value)=>{
+                                                setAudcadRate(value)
+                                            }}
+                                            onKeyDown={audcadHandler}
+                                        />
+                                   </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(cadaudRate)}
+                                            onChange={(value)=>{
+                                                setCadaudRate(value)
+                                            }}
+                                            onKeyDown={cadaudHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            AUD / EUR
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(audeurRate)}
+                                            onChange={(value)=>{
+                                                setAudeurRate(value)
+                                            }}
+                                            onKeyDown={audeurHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(euraudRate)}
+                                            onChange={(value)=>{
+                                                setEuraudRate(value)
+                                            }}
+                                            onKeyDown={euraudHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw", marginBottom: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            AUD / USD
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(audusdRate)}
+                                            onChange={(value)=>{
+                                                setAudusdRate(value)
+                                            }}
+                                            onKeyDown={audusdHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(usdaudRate)}
+                                            onChange={(value)=>{
+                                                setUsdaudRate(value)
+                                            }}
+                                            onKeyDown={usdaudHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                            </CustomBox>
+                        </BoxContainer>
+        {/* ---IRR Rates */}
+                         <BoxContainer style={{width: "32vw"}}>
+                            <CustomBox>
+                                <BoxHeader style={{width: "25vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <YellowLine>
+                                        <Header>IRR Rates</Header>
+                                    </YellowLine>
+                                </BoxHeader>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            IRR / AED
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(irraedRate,0)}
+                                            onChange={(value)=>{
+                                                setIrraedRate(value)
+                                            }}
+                                            onKeyDown={irraedHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(aedirrRate,0)}
+                                            onChange={(value)=>{
+                                                setAedirrRate(value)
+                                            }}
+                                            onKeyDown={aedirrHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            IRR / CAD
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(irrcadRate,0)}
+                                            onChange={(value)=>{
+                                                setIrrcadRate(value)
+                                            }}
+                                            onKeyDown={irrcadHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(cadirrRate,0)}
+                                            onChange={(value)=>{
+                                                setCadirrRate(value)
+                                            }}
+                                            onKeyDown={cadirrHandler}
+                                        />
+                                   </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            IRR / EUR
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(irreurRate,0)}
+                                            onChange={(value)=>{
+                                                setIrreurRate(value)
+                                            }}
+                                            onKeyDown={irreurHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(eurirrRate,0)}
+                                            onChange={(value)=>{
+                                                setEurirrRate(value)
+                                            }}
+                                            onKeyDown={eurirrHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            IRR / TRL
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(irrtrlRate,0)}
+                                            onChange={(value)=>{
+                                                setIrrtrlRate(value)
+                                            }}
+                                            onKeyDown={irrtrlHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(trlirrRate,0)}
+                                            onChange={(value)=>{
+                                                setTrlirrRate(value)
+                                            }}
+                                            onKeyDown={trlirrHandler}
+                                        />
+                                    </BoxContent>
+                                </BoxContent>
+                                <BoxContent style={{width: "30vw", marginLeft: "1vw", marginTop: "1vw", marginBottom: "1vw"}}>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <Title style={{width: "5vw"}}>
+                                            IRR / USD
+                                        </Title>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(irrusdRate,0)}
+                                            onChange={(value)=>{
+                                                setIrrusdRate(value)
+                                            }}
+                                            onKeyDown={irrusdHandler}
+                                        />
+                                    </BoxContent>
+                                    <BoxContent style={{width: "13vw"}}>
+                                        <InputNumber
+                                            variant="filled"
+                                            style={{width: "7vw"}}
+                                            min={0}
+                                            value={FormatNumber(usdirrRate,0)}
+                                            onChange={(value)=>{
+                                                setUsdirrRate(value)
+                                            }}
+                                            onKeyDown={usdirrHandler}
+                                        />
                                     </BoxContent>
                                 </BoxContent>
                             </CustomBox>

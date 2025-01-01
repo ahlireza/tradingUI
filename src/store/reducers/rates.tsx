@@ -8,32 +8,42 @@ import * as actions from "../actions/rates"
 const initialState = {
     days: 2,
 
-    audirrRate: 450000,
-    irraudRate: 460000,
-    audaedRate: 2.3929,
-    aedaudRate: 2.4154,
-    audeurRate: 0.5525,
-    euraudRate: 0.5586,
-    audusdRate: 0.6623,
-    usdaudRate: 0.6711,
+    audRates:{
+        audirrRate: 0,
+        irraudRate: 0,
+        audaedRate: 0,
+        aedaudRate: 0,
+        audcadRate: 0,
+        cadaudRate: 0,
+        audeurRate: 0,
+        euraudRate: 0,
+        audusdRate: 0,
+        usdaudRate: 0
+    },
+    
+    irrRates:{
+        aedirrRate: 0,
+        irraedRate: 0,
+        cadirrRate: 0,
+        irrcadRate: 0,
+        eurirrRate: 0,
+        irreurRate: 0,
+        trlirrRate: 0,
+        irrtrlRate: 0,
+        usdirrRate: 0,
+        irrusdRate: 0
+    },
 
-    aedirrRate: 200000,
-    irraedRate: 203000,
-    eurirrRate: 890000,
-    irreurRate: 905000,
-    trlirrRate: 160000,
-    irrtrlRate: 170000,
-    usdirrRate: 710000,
-    irrusdRate: 720000,
-
-    audirrSell: 0,
-    irraudSell: 0,
-    audirrAED: 0,
-    irraudAED: 0,
-    audirrMarket: 0,
-    irraudMarket: 0,
-    audirrSuggestion: 0,
-    irraudSuggestion: 0
+    suggestionRates:{
+        audirrSell: 0,
+        irraudSell: 0,
+        audirrAED: 0,
+        irraudAED: 0,
+        audirrMarket: 0,
+        irraudMarket: 0,
+        audirrSuggestion: 0,
+        irraudSuggestion: 0            
+    }
 }
 
 //------------------------------
@@ -42,35 +52,31 @@ const initialState = {
 export default createReducer(initialState, (builder) => {
     builder
         .addCase(actions.updateDays, (state, action) => { state.days = action.payload })
-
-        .addCase(actions.updateaudirrRate, (state, action) => { state.audirrRate = action.payload })
-        .addCase(actions.updateirraudRate, (state, action) => { state.irraudRate = action.payload })
-        .addCase(actions.updateaudaedRate, (state, action) => { state.audaedRate = action.payload })
-        .addCase(actions.updateaedaudRate, (state, action) => { state.aedaudRate = action.payload })
-        .addCase(actions.updateaudcadRate, (state, action) => { state.audcadRate = action.payload })
-        .addCase(actions.updatecadaudRate, (state, action) => { state.cadaudRate = action.payload })
-        .addCase(actions.updateaudeurRate, (state, action) => { state.audeurRate = action.payload })
-        .addCase(actions.updateeuraudRate, (state, action) => { state.euraudRate = action.payload })
-        .addCase(actions.updateaudusdRate, (state, action) => { state.audusdRate = action.payload })
-        .addCase(actions.updateusdaudRate, (state, action) => { state.usdaudRate = action.payload })
-    
-        .addCase(actions.updateaedirrRate, (state, action) => { state.aedirrRate = action.payload })
-        .addCase(actions.updateirraedRate, (state, action) => { state.irraedRate = action.payload })
-        .addCase(actions.updateeurirrRate, (state, action) => { state.eurirrRate = action.payload })
-        .addCase(actions.updatecadirrRate, (state, action) => { state.cadirrRate = action.payload })
-        .addCase(actions.updateirrcadRate, (state, action) => { state.irrcadRate = action.payload })
-        .addCase(actions.updateirreurRate, (state, action) => { state.irreurRate = action.payload })
-        .addCase(actions.updatetrlirrRate, (state, action) => { state.trlirrRate = action.payload })
-        .addCase(actions.updateirrtrlRate, (state, action) => { state.irrtrlRate = action.payload })
-        .addCase(actions.updateusdirrRate, (state, action) => { state.usdirrRate = action.payload })
-        .addCase(actions.updateirrusdRate, (state, action) => { state.irrusdRate = action.payload })
-
-        .addCase(actions.updateaudirrSell, (state, action) => { state.audirrSell = action.payload })
-        .addCase(actions.updateirraudSell, (state, action) => { state.irraudSell = action.payload })
-        .addCase(actions.updateaudirrAED, (state, action) => { state.audaedAed = action.payload })
-        .addCase(actions.updateirraudAED, (state, action) => { state.irraedAed = action.payload })
-        .addCase(actions.updateaudirrMarket, (state, action) => { state.audirrMarket = action.payload })
-        .addCase(actions.updateirraudMarket, (state, action) => { state.irraudMarket = action.payload })
-        .addCase(actions.updateaudirrSuggestion, (state, action) => { state.audirrSuggestion = action.payload })
-        .addCase(actions.updateirraudSuggestion, (state, action) => { state.irraudSuggestion = action.payload })
+        .addMatcher(
+            (action) => action.type.startsWith("audRates/"),
+            (state, action) => {
+                const audRateKey = action.type.split("/")[1]
+                if (audRateKey in state.audRates) {
+                   state.audRates[audRateKey] = action.payload 
+                }
+            }
+        )
+        .addMatcher(
+            (action) => action.type.startsWith("irrRates/"),
+            (state, action) => {
+                const irrRateKey = action.type.split("/")[1]
+                if (irrRateKey in state.irrRates) {
+                   state.irrRates[irrRateKey] = action.payload 
+                }
+            }
+        )
+        .addMatcher(
+            (action) => action.type.startsWith("suggestionRates/"),
+            (state, action) => {
+                const suggestionRateKey = action.type.split("/")[1]
+                if (suggestionRateKey in state.suggestionRates) {
+                   state.suggestionRates[suggestionRateKey] = action.payload 
+                }
+            }
+        )
 })

@@ -76,6 +76,11 @@ export const Dashboard = () => {
     const [aedSyndey, setAudSyndey] = useState(0)
     const [aedTehran, setAedTehran] = useState(270345)
 
+    const [cadBalance, setCadBalance] = useState(3000)
+    const [cadMelbourne, setCadMelbourne] = useState(0)
+    const [cadSydney, setCadSydney] = useState(0)
+    const [cadTehran, setCadTehran] = useState(0)
+
     const [eurBalance, setEurBalance] = useState(3000)
     const [eurMelbourne, setEurMelbourne] = useState(1000)
     const [eurSydney, setEurSydney] = useState(2000)
@@ -92,59 +97,60 @@ export const Dashboard = () => {
     const [usdTehran, setUsdTehran] = useState(40000)
 
     //---Rate
-    const [audirrRate, setAudirrRate] = useState(rate.audirrRate)
-    const [irraudRate, setIrraudRate] = useState(rate.irraudRate)
+    const [audirrRate, setAudirrRate] = useState(rate.audRates.audirrRate)
+    const [irraudRate, setIrraudRate] = useState(rate.audRates.irraudRate)
 
-    const [audaedRate, setAudaedRate] = useState(rate.audaedRate)
-    const [aedaudRate, setAedaudRate] = useState(rate.aedaudRate)
-    const [audeurRate, setAudeurRate] = useState(rate.audeurRate)
-    const [euraudRate, setEuraudRate] = useState(rate.euraudRate)
-    const [audusdRate, setAudusdRate] = useState(rate.audusdRate)
-    const [usdaudRate, setUsdaudRate] = useState(rate.usdaudRate)
+    const [audaedRate, setAudaedRate] = useState(rate.audRates.audaedRate)
+    const [aedaudRate, setAedaudRate] = useState(rate.audRates.aedaudRate)
+    const [audcadRate, setAudcadRate] = useState(rate.audRates.audcadRate)
+    const [cadaudRate, setCadaudRate] = useState(rate.audRates.cadaudRate)
+    const [audeurRate, setAudeurRate] = useState(rate.audRates.audeurRate)
+    const [euraudRate, setEuraudRate] = useState(rate.audRates.euraudRate)
+    const [audusdRate, setAudusdRate] = useState(rate.audRates.audusdRate)
+    const [usdaudRate, setUsdaudRate] = useState(rate.audRates.usdaudRate)
 
-    const [aedirrRate, setAedirrRate] = useState(rate.aedirrRate)
-    const [irraedRate, setIrraedRate] = useState(rate.irraedRate)
-    const [eurirrRate, setEurirrRate] = useState(rate.eurirrRate)
-    const [irreurRate, setIrreurRate] = useState(rate.irreurRate)
-    const [trlirrRate, setTrlirrRate] = useState(rate.trlirrRate)
-    const [irrtrlRate, setIrrtrlRate] = useState(rate.irrtrlRate)
-    const [usdirrRate, setUsdirrRate] = useState(rate.usdirrRate)
-    const [irrusdRate, setIrrusdRate] = useState(rate.irrusdRate)
+    const [aedirrRate, setAedirrRate] = useState(rate.irrRates.aedirrRate)
+    const [irraedRate, setIrraedRate] = useState(rate.irrRates.irraedRate)
+    const [cadirrRate, setCadirrRate] = useState(rate.irrRates.cadirrRate)
+    const [irrcadRate, setIrrcadRate] = useState(rate.irrRates.irrcadRate)
+    const [eurirrRate, setEurirrRate] = useState(rate.irrRates.eurirrRate)
+    const [irreurRate, setIrreurRate] = useState(rate.irrRates.irreurRate)
+    const [trlirrRate, setTrlirrRate] = useState(rate.irrRates.trlirrRate)
+    const [irrtrlRate, setIrrtrlRate] = useState(rate.irrRates.irrtrlRate)
+    const [usdirrRate, setUsdirrRate] = useState(rate.irrRates.usdirrRate)
+    const [irrusdRate, setIrrusdRate] = useState(rate.irrRates.irrusdRate)
 
     const [days, setDays] = useState(rate.days)
     const [audirrAverage, setAudirrAverage] = useState(0)
     const [irraudAverage, setIrraudAverage] = useState(0)
 
     //---Suggestion
-    const [audirrSell, setAudirrSell] = useState(rate.audirrSell)
-    const [irraudSell, setIrraudSell] = useState(rate.irraudSell)
-
-    const [audirrAED, setAudirrAED] = useState(rate.audirrAED)
-    const [irraudAED, setIrraudAED] = useState(rate.irraudAED)
-
-    const [audirrMarket, setAudirrMarket] = useState(rate.audirrMarket)
-    const [irraudMarket, setIrraudMarket] = useState(rate.irraudMarket)
-
-    const [audirrSuggestion, setAudirrSuggestion] = useState(rate.audirrSuggestion)
-    const [irraudSuggestion, setIrraudSuggestion] = useState(rate.irraudSuggestion)
+    const [audirrSell, setAudirrSell] = useState(rate.suggestionRates.audirrSell)
+    const [irraudSell, setIrraudSell] = useState(rate.suggestionRates.irraudSell)
+    const [audirrAED, setAudirrAED] = useState(rate.suggestionRates.audirrAED)
+    const [irraudAED, setIrraudAED] = useState(rate.suggestionRates.irraudAED)
+    const [audirrMarket, setAudirrMarket] = useState(rate.suggestionRates.audirrMarket)
+    const [irraudMarket, setIrraudMarket] = useState(rate.suggestionRates.irraudMarket)
+    const [audirrSuggestion, setAudirrSuggestion] = useState(rate.suggestionRates.audirrSuggestion)
+    const [irraudSuggestion, setIrraudSuggestion] = useState(rate.suggestionRates.irraudSuggestion)
 
     //---Competitors
-    const [audirrMoneyMex, setAudirrMoneyMex] = useState(competitor.audirrMoneyMex)
-    const [irraudMoneyMex, setIrraudMoneyMex] = useState(competitor.irraudMoneyMex)
-    const [audirrRosecap, setAudirrRosecap] = useState(competitor.audirrRosecap)
-    const [irraudRosecap, setIrraudRosecap] = useState(competitor.irraudRosecap)
-    const [audirrSeyhoon, setAudirrSeyhoon] = useState(competitor.audirrSeyhoon)
-    const [irraudSeyhoon, setIrraudSeyhoon] = useState(competitor.irraudSeyhoon)
-    const [audirrJavadi, setAudirrJavadi] = useState(competitor.audirrJavadi)
-    const [irraudJavadi, setIrraudJavadi] = useState(competitor.irraudJavadi)
-    const [audirrExpress, setAudirrExpress] = useState(competitor.audirrExpress)
-    const [irraudExpress, setIrraudExpress] = useState(competitor.irraudExpress)
-    const [audirrKangroos, setAudirrKangroos] = useState(competitor.audirrKangroos)
-    const [irraudKangroos, setIrraudKangroos] = useState(competitor.irraudKangroos)
-    const [audirrRoomi, setAudirrRoomi] = useState(competitor.audirrRoomi)
-    const [irraudRoomi, setIrraudRoomi] = useState(competitor.irraudRoomi)
-    const [audirrAfshar, setAudirrAfshar] = useState(competitor.audirrAfshar)
-    const [irraudAfshar, setIrraudAfshar] = useState(competitor.irraudAfshar)
+    const [audirrMoneyMex, setAudirrMoneyMex] = useState(competitor.competitorsRate.audirrMoneyMex)
+    const [irraudMoneyMex, setIrraudMoneyMex] = useState(competitor.competitorsRate.irraudMoneyMex)
+    const [audirrRosecap, setAudirrRosecap] = useState(competitor.competitorsRate.audirrRosecap)
+    const [irraudRosecap, setIrraudRosecap] = useState(competitor.competitorsRate.irraudRosecap)
+    const [audirrSeyhoon, setAudirrSeyhoon] = useState(competitor.competitorsRate.audirrSeyhoon)
+    const [irraudSeyhoon, setIrraudSeyhoon] = useState(competitor.competitorsRate.irraudSeyhoon)
+    const [audirrJavadi, setAudirrJavadi] = useState(competitor.competitorsRate.audirrJavadi)
+    const [irraudJavadi, setIrraudJavadi] = useState(competitor.competitorsRate.irraudJavadi)
+    const [audirrExpress, setAudirrExpress] = useState(competitor.competitorsRate.audirrExpress)
+    const [irraudExpress, setIrraudExpress] = useState(competitor.competitorsRate.irraudExpress)
+    const [audirrKangroos, setAudirrKangroos] = useState(competitor.competitorsRate.audirrKangroos)
+    const [irraudKangroos, setIrraudKangroos] = useState(competitor.competitorsRate.irraudKangroos)
+    const [audirrRoomi, setAudirrRoomi] = useState(competitor.competitorsRate.audirrRoomi)
+    const [irraudRoomi, setIrraudRoomi] = useState(competitor.competitorsRate.irraudRoomi)
+    const [audirrAfshar, setAudirrAfshar] = useState(competitor.competitorsRate.audirrAfshar)
+    const [irraudAfshar, setIrraudAfshar] = useState(competitor.competitorsRate.irraudAfshar)
 
     const [audirrMax, setAudirrMax] = useState(0)
     const [irraudMin, setIrraudMin] = useState(0)
@@ -153,16 +159,18 @@ export const Dashboard = () => {
     const [currencies, setCurrencies] = useState([
         {x: "AUD", y: audBalance},
         {x: "AED", y: aedBalance/aedaudRate},
+        {x: "CAD", y: cadBalance},
         {x: "EUR", y: eurBalance*(eurirrRate/irraudRate)},
         {x: "TRL", y: trlBalance*(trlirrRate/irraudRate)},
         {x: "USD", y: usdBalance*(usdirrRate/irraudRate)}
     ])
     const audColor = Color.BLUE
     const aedColor = Color.GREEN
+    const cadColor = Color.BLACK
     const eurColor = Color.BROWN_LIGHT
     const trlColor = Color.YELLOW
     const usdColor = Color.RED_LIGHT
-    const customColors = [audColor, aedColor, eurColor, trlColor, usdColor]
+    const customColors = [audColor, aedColor, cadColor, eurColor, trlColor, usdColor]
     
     //------------------------------
     //---Average Days Handler
@@ -180,36 +188,35 @@ export const Dashboard = () => {
     //------------------------------
     //---Competitor Rates Handler
     //------------------------------
-    const MoneyMexaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrMoneyMex(audirrMoneyMex))}}
-    const MoneyMexirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudMoneyMex(irraudMoneyMex))}}
+    const MoneyMexaudirrHandler = (e) => {dispatch(updateaudirrMoneyMex(audirrMoneyMex))}
+    const MoneyMexirraudHandler = (e) => {dispatch(updateirraudMoneyMex(irraudMoneyMex))}
 
-    const RosecpaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrRosecap(audirrRosecap))}}
-    const RosecpirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudRosecap(irraudRosecap))}}
+    const RosecpaudirrHandler = (e) => {dispatch(updateaudirrRosecap(audirrRosecap))}
+    const RosecpirraudHandler = (e) => {dispatch(updateirraudRosecap(irraudRosecap))}
 
-    const SeyhoonaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrSeyhoon(audirrSeyhoon))}}
-    const SeyhoonirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudSeyhoon(irraudSeyhoon))}}
+    const SeyhoonaudirrHandler = (e) => {dispatch(updateaudirrSeyhoon(audirrSeyhoon))}
+    const SeyhoonirraudHandler = (e) => {dispatch(updateirraudSeyhoon(irraudSeyhoon))}
+    const JavadiaudirrHandler = (e) => {dispatch(updateaudirrJavadi(audirrJavadi))}
+    const JavadiirraudHandler = (e) => {dispatch(updateirraudJavadi(irraudJavadi))}
 
-    const JavadiaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrJavadi(audirrJavadi))}}
-    const JavadiirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudJavadi(irraudJavadi))}}
+    const ExpressaudirrHandler = (e) => {dispatch(updateaudirrExpress(audirrExpress))}
+    const ExpressirraudHandler = (e) => {dispatch(updateirraudExpress(irraudExpress))}
 
-    const ExpressaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrExpress(audirrExpress))}}
-    const ExpressirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudExpress(irraudExpress))}}
+    const KangroosaudirrHandler = (e) => {dispatch(updateaudirrKangroos(audirrKangroos))}
+    const KangroosirraudHandler = (e) => {dispatch(updateirraudKangroos(irraudKangroos))}
 
-    const KangroosaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrKangroos(audirrKangroos))}}
-    const KangroosirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudKangroos(irraudKangroos))}}
+    const RoomiaudirrHandler = (e) => {dispatch(updateaudirrRoomi(audirrRoomi))}
+    const RoomiirraudHandler = (e) => {dispatch(updateirraudRoomi(irraudRoomi))}
 
-    const RoomiaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrRoomi(audirrRoomi))}}
-    const RoomiirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudRoomi(irraudRoomi))}}
-
-    const AfsharaudirrHandler = (e) => {if (e.key === "Enter") {dispatch(updateaudirrAfshar(audirrAfshar))}}
-    const AfsharirraudHandler = (e) => {if (e.key === "Enter") {dispatch(updateirraudAfshar(irraudAfshar))}}
+    const AfsharaudirrHandler = (e) => {dispatch(updateaudirrAfshar(audirrAfshar))}
+    const AfsharirraudHandler = (e) => {dispatch(updateirraudAfshar(irraudAfshar))}
 
     //------------------------------
     //---Suggestions Rates
     //------------------------------
     useEffect(() => {
-        setAudirrMarket(audirrMax + Benefit.Market)
-        setIrraudMarket(irraudMin - Benefit.Market)
+        setAudirrMarket(audirrMax <= 0 ? 0 : (audirrMax + Benefit.Market))
+        setIrraudMarket(irraudMin <= 0 ? 0 : irraudMin)
 
         dispatch(updateaudirrMarket(audirrMarket))
         dispatch(updateirraudMarket(irraudMarket))
@@ -233,12 +240,16 @@ export const Dashboard = () => {
 
 
     useEffect(() => {
-        setAudirrSuggestion((Math.round(Math.min(audirrSell, audirrMarket)/1000)*1000))
-        setIrraudSuggestion((Math.round(Math.max(irraudSell, irraudMarket)/1000)*1000))
+        const audirrList = [audirrMarket, audirrSell, audirrAED]
+        const nonZeroList = audirrList.filter(audirr => audirr > 0)
+        const audirrSuggestion = nonZeroList.length > 0 ? Math.min(...nonZeroList) : 0
+        setAudirrSuggestion((Math.round(audirrSuggestion/1000)*1000))
+
+        setIrraudSuggestion((Math.round(Math.max(irraudMarket, irraudSell, irraudAED)/1000)*1000))
 
         dispatch(updateaudirrSuggestion(audirrSuggestion))
         dispatch(updateirraudSuggestion(irraudSuggestion))
-    }, [audirrSell, irraudSell, audirrMarket, irraudMarket])
+    }, [audirrSell, irraudSell, audirrMarket, irraudMarket, audirrAED, irraudAED])
 
     //------------------------------
     //---Competitors Max and Min Rates
@@ -248,7 +259,10 @@ export const Dashboard = () => {
     }
 
     const MinCompetitors = () => {
-        return Math.min(irraudMoneyMex, irraudRosecap, irraudSeyhoon, irraudJavadi, irraudExpress, irraudKangroos, irraudRoomi, irraudAfshar)
+        const irraudList = [irraudMoneyMex, irraudRosecap, irraudSeyhoon, irraudJavadi, irraudExpress, irraudKangroos, irraudRoomi, irraudAfshar]
+        const nonZeroList = irraudList.filter(rate => rate > 0)
+    
+        return nonZeroList.length > 0 ? Math.min(...nonZeroList) : 0
     }
 
     useEffect(() => {
@@ -370,6 +384,15 @@ export const Dashboard = () => {
                                     </Content>
                                 </BoxContent>
                                 <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
+                                    <div style={{ width: "10px", height: "10px", backgroundColor: cadColor}}></div>
+                                    <Title style={{width: "4vw"}}>
+                                        CAD
+                                    </Title>
+                                    <Content>
+                                        {FormatNumber(cadBalance,2)}
+                                    </Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "10vw", marginLeft: "1vw", justifyContent: "flex-start"}}>
                                     <div style={{ width: "10px", height: "10px", backgroundColor: eurColor}}></div>
                                     <Title style={{width: "4vw"}}>
                                         EUR
@@ -443,7 +466,7 @@ export const Dashboard = () => {
                                     <Content>{FormatNumber(irraudMarket,0)}</Content>
                                 </BoxContent>
                                 <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
-                                    <Title>Based on Sell</Title>
+                                    <Title>Based on Buy</Title>
                                     <Content>{FormatNumber(irraudSell,0)}</Content>
                                 </BoxContent>
                                 <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
@@ -479,6 +502,11 @@ export const Dashboard = () => {
                                     <Content>{FormatNumber(aedaudRate)}</Content>
                                 </BoxContent>
                                 <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                                    <Title>AUD / CAD</Title>
+                                    <Content>{FormatNumber(audcadRate)}</Content>
+                                    <Content>{FormatNumber(cadaudRate)}</Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
                                     <Title>AUD / EUR</Title>
                                     <Content>{FormatNumber(audeurRate)}</Content>
                                     <Content>{FormatNumber(euraudRate)}</Content>
@@ -493,6 +521,11 @@ export const Dashboard = () => {
                                     <Title>AED / IRR</Title>
                                     <Content>{FormatNumber(aedirrRate,0)}</Content>
                                     <Content>{FormatNumber(irraedRate,0)}</Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                                    <Title>CAD / IRR</Title>
+                                    <Content>{FormatNumber(cadirrRate,0)}</Content>
+                                    <Content>{FormatNumber(irrcadRate,0)}</Content>
                                 </BoxContent>
                                 <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
                                     <Title>EUR / IRR</Title>
@@ -542,7 +575,7 @@ export const Dashboard = () => {
                                     <Title>Average AUD / IRR</Title>
                                     <Content>{audirrAverage.toLocaleString("en-us")}</Content>
                                 </BoxContent>
-                                <BoxContent style={{width: "10vw", marginRight: "2vw", marginBottom: "15vw"}}>
+                                <BoxContent style={{width: "10vw", marginRight: "2vw", marginBottom: "20vw"}}>
                                     <Title>Average IRR / AUD</Title>
                                     <Content>{irraudAverage.toLocaleString("en-us")}</Content>
                                 </BoxContent>
