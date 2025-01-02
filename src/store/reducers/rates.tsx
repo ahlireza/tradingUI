@@ -40,9 +40,7 @@ const initialState = {
         audirrAED: 0,
         irraudAED: 0,
         audirrMarket: 0,
-        irraudMarket: 0,
-        audirrSuggestion: 0,
-        irraudSuggestion: 0            
+        irraudMarket: 0
     }
 }
 

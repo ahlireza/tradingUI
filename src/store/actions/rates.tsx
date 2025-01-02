@@ -37,5 +37,3 @@ export const updateaudirrAED = createAction<RateInterface>("suggestionRates/audi
 export const updateirraudAED = createAction<RateInterface>("suggestionRates/irraudAED")
 export const updateaudirrMarket = createAction<RateInterface>("suggestionRates/audirrMarket")
 export const updateirraudMarket = createAction<RateInterface>("suggestionRates/irraudMarket")
-export const updateaudirrSuggestion = createAction<RateInterface>("suggestionRates/audirrSuggestion")
-export const updateirraudSuggestion = createAction<RateInterface>("suggestionRates/irraudSuggestion")

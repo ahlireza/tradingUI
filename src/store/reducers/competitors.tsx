@@ -22,7 +22,10 @@ const initialState = {
         audirrRoomi: 0,
         irraudRoomi: 0,
         audirrAfshar: 0,
-        irraudAfshar: 0
+        irraudAfshar: 0,
+
+        audirrMax: 0,
+        irraudMin: 0
     }
 }
 

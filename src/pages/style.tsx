@@ -25,6 +25,15 @@ export const BoxHeader = styled(CustomBox)`
   border-bottom: 3px solid #F5F5F5;
 `;
 
+export const BoxName = styled(Typography)`
+  color: #0A0A0A;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-left: 1vw;
+`;
+
 export const YellowLine = styled.span`
   position: relative;
   &::after {

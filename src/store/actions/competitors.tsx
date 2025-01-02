@@ -29,3 +29,6 @@ export const updateirraudRoomi = createAction<RateInterface>("competitorsRate/ir
 export const updateaudirrAfshar = createAction<RateInterface>("competitorsRate/audirrAfshar")
 export const updateirraudAfshar = createAction<RateInterface>("competitorsRate/irraudAfshar")
 
+export const updateaudirrMax = createAction<RateInterface>("competitorsRate/audirrMax")
+export const updateirraudMin = createAction<RateInterface>("competitorsRate/irraudMin")
+

@@ -1,38 +1,33 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState }      from "react"
 import { Helmet }   from "react-helmet"
 
 import { InputNumber }    from "antd"
 
 import { FormatNumber } from "src/components/common/format"
 import { CustomBox }    from "src/components/core/CustomBox"
+import { Benefit }      from "src/definition/domain"
 
 import { RateHeader } from "./header"
 
 import { AppDispatch, RootState }   from "src/store"
 import {
-    updateaudirrRate,
-    updateirraudRate,
+    updateaudirrRate, updateirraudRate,
 
-    updateaudaedRate,
-    updateaedaudRate,
-    updateaudcadRate,
-    updatecadaudRate,
-    updateaudeurRate,
-    updateeuraudRate,
-    updateaudusdRate,
-    updateusdaudRate,
+    updateaudaedRate, updateaedaudRate,
+    updateaudcadRate, updatecadaudRate,
+    updateaudeurRate, updateeuraudRate,
+    updateaudusdRate, updateusdaudRate,
 
-    updateaedirrRate,
-    updateirraedRate,
-    updatecadirrRate,
-    updateirrcadRate,
-    updateeurirrRate,
-    updateirreurRate,
-    updatetrlirrRate,
-    updateirrtrlRate,
-    updateusdirrRate,
-    updateirrusdRate
+    updateaedirrRate, updateirraedRate,
+    updatecadirrRate, updateirrcadRate,
+    updateeurirrRate, updateirreurRate,
+    updatetrlirrRate, updateirrtrlRate,
+    updateusdirrRate, updateirrusdRate,
+
+    updateaudirrSell, updateirraudSell,
+    updateaudirrAED, updateirraudAED,
+    updateaudirrMarket, updateirraudMarket
 }   from "src/store/actions/rates"
 
 import {
@@ -53,6 +48,7 @@ export const Rate = () => {
     const dispatch = useDispatch<AppDispatch>()
     //---State
     const rate = useSelector((state: RootState) => state.rates)
+    const competitor = useSelector((state: RootState) => state.competitors)
 
     //---Rate
     const [audirrRate, setAudirrRate] = useState(rate.audRates.audirrRate)
@@ -79,8 +75,16 @@ export const Rate = () => {
     const [irrusdRate, setIrrusdRate] = useState(rate.irrRates.irrusdRate)
 
     //---Suggestion
-    const [audirrSuggestion, setAudirrSuggestion] = useState(rate.suggestionRates.audirrSuggestion)
-    const [irraudSuggestion, setIrraudSuggestion] = useState(rate.suggestionRates.irraudSuggestion)
+    const [audirrSell, setAudirrSell] = useState(rate.suggestionRates.audirrSell)
+    const [irraudBuy, setIrraudBuy] = useState(rate.suggestionRates.irraudBuy)
+    const [audirrAED, setAudirrAED] = useState(rate.suggestionRates.audirrAED)
+    const [irraudAED, setIrraudAED] = useState(rate.suggestionRates.irraudAED)
+    const [audirrMarket, setAudirrMarket] = useState(rate.suggestionRates.audirrMarket)
+    const [irraudMarket, setIrraudMarket] = useState(rate.suggestionRates.irraudMarket)
+
+    //---Competitors
+    const [audirrMax, setAudirrMax] = useState(competitor.competitorsRate.audirrMax)
+    const [irraudMin, setIrraudMin] = useState(competitor.competitorsRate.irraudMin)
 
     //------------------------------
     //---Rates Handler
@@ -109,6 +113,38 @@ export const Rate = () => {
     const irrusdHandler = (e) => {dispatch(updateirrusdRate(irrusdRate))}
     
     //------------------------------
+    //---Suggestions Rates
+    //------------------------------
+    useEffect(() => {
+        const max = audirrMax <= 0 ? 0 : (audirrMax + Benefit.Market)
+        const min = irraudMin <= 0 ? 0 : irraudMin
+        setAudirrMarket(Math.round(max/1000)*1000)
+        setIrraudMarket(Math.round(min/1000)*1000)
+
+        dispatch(updateaudirrMarket(audirrMarket))
+        dispatch(updateirraudMarket(irraudMarket))
+    })
+
+    useEffect(() => {
+        const sell = audirrRate * (1 - Benefit.AUDIRR)
+        const buy = irraudRate * (1 + Benefit.IRRAUD)
+        setAudirrSell(Math.round(sell/1000)*1000)
+        setIrraudBuy(Math.round(buy/1000)*1000)
+
+        dispatch(updateaudirrSell(audirrSell))
+        dispatch(updateirraudSell(irraudBuy))
+    }, [audirrRate, irraudRate])
+
+    useEffect(() => {
+        const audaed = audaedRate * irraedRate
+        const aedaud = aedaudRate * aedirrRate
+        setAudirrAED(Math.round(audaed/1000)*1000)
+        setIrraudAED(Math.round(aedaud/1000)*1000)
+
+        dispatch(updateaudirrAED(audirrAED))
+        dispatch(updateirraudAED(irraudAED))
+    }, [aedaudRate, audaedRate, aedirrRate, irraedRate])
+    //------------------------------
     return (
         <>
             <Helmet>
@@ -119,18 +155,18 @@ export const Rate = () => {
         {/* ---Body */}
                 <RowContainer>
                     <CustomBox>
-        {/* ---AUD IRR Rate */}
-                        <BoxContainer style={{width: "65vw"}}>
+        {/* ---AUD / IRR Rate */}
+                        <BoxContainer style={{width: "32vw"}}>
                             <CustomBox>
-                                <BoxHeader style={{width: "40vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
                                     <YellowLine>
-                                        <Header>AUD - IRR Rate</Header>
+                                        <Header>AUD / IRR</Header>
                                     </YellowLine>
                                 </BoxHeader>
-                                <BoxContent style={{width: "40vw", marginLeft: "1vw", marginTop: "1vw"}}>
-                                    <BoxContent style={{width: "15vw"}}>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw", marginBottom: "1vw"}}>
+                                    <BoxContent style={{width: "10vw"}}>
                                         <Title style={{width: "5vw"}}>
-                                            AUD / IRR
+                                            Rate
                                         </Title>
                                         <InputNumber
                                             variant="filled"
@@ -143,9 +179,48 @@ export const Rate = () => {
                                             onKeyDown={audirrHandler}
                                         />
                                     </BoxContent>
-                                    <BoxContent style={{width: "15vw"}}>
+                                </BoxContent>
+            {/* ---AUD / IRR Rate Suggestion */}
+                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "2vw"}}>
+                                </BoxHeader>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <Title>Based on Market</Title>
+                                    <Content>{FormatNumber(audirrMarket,0)}</Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                                    <Title>Based on Sell</Title>
+                                    <Content>{FormatNumber(audirrSell,0)}</Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
+                                    <Title>Based on AED</Title>
+                                    <Content>{FormatNumber(audirrAED,0)}</Content>
+                                </BoxContent>
+                            </CustomBox>
+                        </BoxContainer>
+        {/* ---AUD / IRR Rate */}
+        <BoxContainer style={{width: "32vw"}}>
+                            <CustomBox>
+                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <YellowLine>
+                                        <Header>Special Rate</Header>
+                                    </YellowLine>
+                                </BoxHeader>
+                            </CustomBox>
+                        </BoxContainer>
+                    </CustomBox>
+                    <CustomBox>
+        {/* ---IRR / AUD Rate */}
+                        <BoxContainer style={{width: "32vw"}}>
+                            <CustomBox>
+                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <YellowLine>
+                                        <Header>IRR / AUD</Header>
+                                    </YellowLine>
+                                </BoxHeader>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw", marginBottom: "1vw"}}>
+                                    <BoxContent style={{width: "10vw"}}>
                                         <Title style={{width: "5vw"}}>
-                                            IRR / AUD
+                                            Rate
                                         </Title>
                                         <InputNumber
                                             variant="filled"
@@ -159,23 +234,20 @@ export const Rate = () => {
                                         />
                                     </BoxContent>
                                 </BoxContent>
-                                <BoxContent style={{width: "35vw", marginLeft: "1vw", marginBottom: "1vw"}}>
-                                    <BoxContent style={{width: "10vw"}}>
-                                        <Title style={{width: "5vw", color: "#000080"}}>
-                                            Suggestion
-                                        </Title>
-                                        <Content style={{color: "#000080"}}>
-                                            {FormatNumber(audirrSuggestion,0)}
-                                        </Content>
-                                    </BoxContent>
-                                    <BoxContent style={{width: "10vw"}}>
-                                        <Title style={{width: "5vw", color: "#000080"}}>
-                                            Suggestion
-                                        </Title>
-                                        <Content style={{color: "#000080"}}>
-                                            {FormatNumber(irraudSuggestion,0)}
-                                        </Content>
-                                    </BoxContent>
+            {/* ---IRR / AUD Rate Suggestion */}
+                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "2vw"}}>
+                                </BoxHeader>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
+                                    <Title>Based on Market</Title>
+                                    <Content>{FormatNumber(irraudMarket,0)}</Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw"}}>
+                                    <Title>Based on Buy</Title>
+                                    <Content>{FormatNumber(irraudBuy,0)}</Content>
+                                </BoxContent>
+                                <BoxContent style={{width: "15vw", marginLeft: "1vw", marginBottom: "1vw"}}>
+                                    <Title>Based on AED</Title>
+                                    <Content>{FormatNumber(irraudAED,0)}</Content>
                                 </BoxContent>
                             </CustomBox>
                         </BoxContainer>
