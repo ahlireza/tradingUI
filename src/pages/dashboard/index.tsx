@@ -61,34 +61,11 @@ export const Dashboard = () => {
     const [availableAED, setAvailableAED] = useState(270345)
 
     const [audBalance, setAudBalance] = useState(50000)
-    const [audMelbourne, setAudMelbourne] = useState(20000)
-    const [audSydney, setAudSydney] = useState(30000)
-    const [audTehran, setAudTehran] = useState(0)
-
     const [aedBalance, setAedBalance] = useState(270345)
-    const [aedMelbopurne, setAudMelbopurne] = useState(0)
-    const [aedSyndey, setAudSyndey] = useState(0)
-    const [aedTehran, setAedTehran] = useState(270345)
-
     const [cadBalance, setCadBalance] = useState(3000)
-    const [cadMelbourne, setCadMelbourne] = useState(0)
-    const [cadSydney, setCadSydney] = useState(0)
-    const [cadTehran, setCadTehran] = useState(0)
-
     const [eurBalance, setEurBalance] = useState(3000)
-    const [eurMelbourne, setEurMelbourne] = useState(1000)
-    const [eurSydney, setEurSydney] = useState(2000)
-    const [eurTehran, setEurTehran] = useState(27000)
-
     const [trlBalance, setTrlBalance] = useState(10000)
-    const [trlMelbourne, setTrlMelbourne] = useState(0)
-    const [trlSydney, setTrlSydney] = useState(0)
-    const [trlTehran, setTrlTehran] = useState(100000)
-
     const [usdBalance, setUsdBalance] = useState(9000)
-    const [usdMelbourne, setUsdMelbourne] = useState(20000)
-    const [usdSydney, setUsdSydney] = useState(30000)
-    const [usdTehran, setUsdTehran] = useState(40000)
 
     //---Rate
     const [audirrRate, setAudirrRate] = useState(rate.audRates.audirrRate)
