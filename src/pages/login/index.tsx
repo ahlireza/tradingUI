@@ -58,10 +58,12 @@ export const Login = () => {
       error = true
     }
   
-    if (error === false){
-      LoginService(username, pass)
-      navigate("/")
-    }
+    // if (error === false){
+    //   LoginService(username, pass)
+    //   navigate("/")
+    // }
+    LoginService(username, pass)
+    navigate("/")
   }
  
   //------------------------------

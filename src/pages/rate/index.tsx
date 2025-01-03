@@ -8,7 +8,8 @@ import { FormatNumber } from "src/components/common/format"
 import { CustomBox }    from "src/components/core/CustomBox"
 import { Benefit }      from "src/definition/domain"
 
-import { RateHeader } from "./header"
+import { SpecialRate }  from "./special"
+import { RateHeader }   from "./header"
 
 import { AppDispatch, RootState }   from "src/store"
 import {
@@ -195,16 +196,13 @@ export const Rate = () => {
                                     <Title>Based on AED</Title>
                                     <Content>{FormatNumber(audirrAED,0)}</Content>
                                 </BoxContent>
-                            </CustomBox>
-                        </BoxContainer>
-        {/* ---AUD / IRR Rate */}
-        <BoxContainer style={{width: "32vw"}}>
-                            <CustomBox>
-                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "1vw"}}>
+
+                                <BoxHeader style={{width: "15vw", marginLeft: "1vw", marginTop: "4vw"}}>
                                     <YellowLine>
                                         <Header>Special Rate</Header>
                                     </YellowLine>
                                 </BoxHeader>
+                                <SpecialRate/>
                             </CustomBox>
                         </BoxContainer>
                     </CustomBox>
